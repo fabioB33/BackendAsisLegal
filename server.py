@@ -102,8 +102,9 @@ app = FastAPI()
 # ⚠️ CONFIGURACIÓN CRÍTICA DE CORS
 origins = [
     "https://legbotdev.pradosdeparaiso.com.pe",  # Dominio de producción
-    "http://localhost:3000",  # Para desarrollo local
-    "http://localhost:3001",
+    "https://frontendAsisLegal.onrender.com",    # Frontend en Render
+    "https://frontendasislegal.onrender.com",    # Frontend en Render (lowercase)
+    "http://localhost:3000",                     # Desarrollo local
 ]
 
 app.add_middleware(
