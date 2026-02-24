@@ -43,7 +43,9 @@ class SQLiteKnowledgeBase:
 
     def _keyword_score(self, query: str, titulo: str, contenido: str) -> float:
         """Puntaje simple por coincidencia de palabras clave."""
-        words = set(re.findall(r'\w+', query.lower()))
+        # Cap query length to prevent ReDoS — use str.split() instead of regex
+        safe_query = query[:500].lower()
+        words = set(w for w in safe_query.split() if len(w) >= 2)
         if not words:
             return 0.0
         text = (titulo + " " + contenido).lower()

@@ -71,6 +71,13 @@ LLM_MODEL_NAME = "gemini-2.5-flash-lite" if GEMINI_API_KEY else "gpt-4o-mini"
 HEYGEN_API_KEY = os.environ.get('HEYGEN_API_KEY', '')
 ELEVENLABS_API_KEY = os.environ.get('ELEVENLABS_API_KEY', '')
 
+# Single source of truth for voice ID — override with ELEVENLABS_VOICE_ID env var
+ELEVENLABS_VOICE_ID = os.environ.get("ELEVENLABS_VOICE_ID", "saqk76H0L3GCnuHtLDw6")  # Karla — Peruvian female
+
+# Validate critical env vars at startup — fail fast with clear message
+if not LLM_KEY:
+    logger.error("❌ CRITICAL: No LLM API key configured. Set GEMINI_API_KEY, OPENAI_API_KEY, or EMERGENT_LLM_KEY")
+
 # Initialize ElevenLabs client
 elevenlabs_client = None
 if ELEVENLABS_API_KEY:
@@ -105,7 +112,19 @@ logger.info("✅ LiveAvatar Service initialized (liveavatar.com)")
 HEYGEN_API_KEY = os.environ.get('HEYGEN_API_KEY', '')
 HEYGEN_AVATAR_ID = os.environ.get('HEYGEN_AVATAR_ID', '')
 
-app = FastAPI()
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    logger.info("✅ Application started successfully")
+    yield
+    # Shutdown — properly close MongoDB async connection
+    logger.info("🛑 Shutting down — closing MongoDB connection...")
+    client.close()
+    logger.info("✅ MongoDB connection closed")
+
+app = FastAPI(lifespan=lifespan)
 
 # ⚠️ CONFIGURACIÓN CRÍTICA DE CORS
 origins = [
@@ -120,7 +139,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
@@ -367,9 +386,13 @@ async def upload_document(
     user_id: str = Form(...)
 ):
     try:
-        content = await file.read()
+        # Read with size limit — reject files larger than 5 MB
+        MAX_UPLOAD_BYTES = 5 * 1024 * 1024
+        content = await file.read(MAX_UPLOAD_BYTES + 1)
+        if len(content) > MAX_UPLOAD_BYTES:
+            raise HTTPException(status_code=413, detail="El archivo supera el límite de 5 MB")
         content_str = content.decode('utf-8', errors='ignore')
-        
+
         doc = Document(
             user_id=user_id,
             filename=file.filename,
@@ -516,7 +539,7 @@ async def text_to_speech(request: dict):
         # Using Lina - Warm Latin American female voice (Colombian accent, works well for Peruvian Spanish)
         audio_stream = elevenlabs_client.text_to_speech.stream(
             text=text,
-            voice_id="saqk76H0L3GCnuHtLDw6",  # Karla - Peruvian female, dynamic & conversational
+            voice_id=ELEVENLABS_VOICE_ID,
             model_id="eleven_multilingual_v2",
             voice_settings=VoiceSettings(
                 stability=0.6,
@@ -525,15 +548,15 @@ async def text_to_speech(request: dict):
                 use_speaker_boost=True
             )
         )
-        
+
         # Collect audio bytes from stream
         audio_bytes = b""
         for chunk in audio_stream:
             audio_bytes += chunk
-        
+
         # Return base64 encoded audio
         audio_base64 = base64.b64encode(audio_bytes).decode('utf-8')
-        
+
         return {
             "audio": audio_base64,
             "format": "mp3"
@@ -601,7 +624,7 @@ con el equipo legal.'''
         logger.info("🔊 Converting response to speech...")
         audio_stream = elevenlabs_client.text_to_speech.stream(
             text=ai_response,
-            voice_id="saqk76H0L3GCnuHtLDw6",  # Karla - Peruvian female, dynamic & conversational
+            voice_id=ELEVENLABS_VOICE_ID,
             model_id="eleven_multilingual_v2",
             voice_settings=VoiceSettings(
                 stability=0.6,
@@ -610,12 +633,12 @@ con el equipo legal.'''
                 use_speaker_boost=True
             )
         )
-        
+
         # Collect audio bytes from stream
         audio_bytes = b""
         for chunk in audio_stream:
             audio_bytes += chunk
-        
+
         # Return base64 encoded audio
         audio_base64 = base64.b64encode(audio_bytes).decode('utf-8')
         logger.info("✅ Voice chat completed successfully")
@@ -846,10 +869,10 @@ Mantén las respuestas breves (máximo 3-4 frases) ya que serán convertidas a v
         ai_response = await chat.send_message(user_message)
         logger.info(f"✅ AI Response generated")
         
-        # Step 4: Convert to speech using agent's voice
+        # Step 4: Convert to speech using agent's voice (fallback to ELEVENLABS_VOICE_ID)
         audio_stream = elevenlabs_client.text_to_speech.stream(
             text=ai_response,
-            voice_id=agent_voice_id,
+            voice_id=agent_voice_id or ELEVENLABS_VOICE_ID,
             model_id="eleven_multilingual_v2",
             voice_settings=VoiceSettings(
                 stability=0.5,
@@ -1032,46 +1055,52 @@ async def _tts_mp3(text: str) -> bytes:
     """Convierte texto a MP3 usando ElevenLabs (Karla, peruana). Para reproducción en browser."""
     if not elevenlabs_client:
         raise Exception("ElevenLabs not configured")
-    voice_id = os.environ.get("ELEVENLABS_VOICE_ID", "saqk76H0L3GCnuHtLDw6")
-    audio_bytes = b""
-    stream = elevenlabs_client.text_to_speech.stream(
-        text=text,
-        voice_id=voice_id,
-        model_id="eleven_multilingual_v2",
-        output_format="mp3_44100_128",
-        voice_settings=VoiceSettings(
-            stability=0.55,
-            similarity_boost=0.80,
-            style=0.0,
-            use_speaker_boost=True,
-        ),
-    )
-    for chunk in stream:
-        audio_bytes += chunk
-    return audio_bytes
+
+    async def _generate() -> bytes:
+        audio_bytes = b""
+        stream = elevenlabs_client.text_to_speech.stream(
+            text=text,
+            voice_id=ELEVENLABS_VOICE_ID,
+            model_id="eleven_multilingual_v2",
+            output_format="mp3_44100_128",
+            voice_settings=VoiceSettings(
+                stability=0.55,
+                similarity_boost=0.80,
+                style=0.0,
+                use_speaker_boost=True,
+            ),
+        )
+        for chunk in stream:
+            audio_bytes += chunk
+        return audio_bytes
+
+    return await asyncio.wait_for(_generate(), timeout=30.0)
 
 
 async def _tts_pcm(text: str) -> bytes:
     """Convierte texto a PCM 16-bit 24kHz usando ElevenLabs (Karla, peruana)."""
     if not elevenlabs_client:
         raise Exception("ElevenLabs not configured")
-    voice_id = os.environ.get("ELEVENLABS_VOICE_ID", "saqk76H0L3GCnuHtLDw6")
-    audio_bytes = b""
-    stream = elevenlabs_client.text_to_speech.stream(
-        text=text,
-        voice_id=voice_id,
-        model_id="eleven_multilingual_v2",
-        output_format="pcm_24000",   # PCM 16-bit 24kHz — requerido por LiveAvatar LITE
-        voice_settings=VoiceSettings(
-            stability=0.55,
-            similarity_boost=0.80,
-            style=0.0,
-            use_speaker_boost=True,
-        ),
-    )
-    for chunk in stream:
-        audio_bytes += chunk
-    return audio_bytes
+
+    async def _generate() -> bytes:
+        audio_bytes = b""
+        stream = elevenlabs_client.text_to_speech.stream(
+            text=text,
+            voice_id=ELEVENLABS_VOICE_ID,
+            model_id="eleven_multilingual_v2",
+            output_format="pcm_24000",   # PCM 16-bit 24kHz — requerido por LiveAvatar LITE
+            voice_settings=VoiceSettings(
+                stability=0.55,
+                similarity_boost=0.80,
+                style=0.0,
+                use_speaker_boost=True,
+            ),
+        )
+        for chunk in stream:
+            audio_bytes += chunk
+        return audio_bytes
+
+    return await asyncio.wait_for(_generate(), timeout=30.0)
 
 
 @api_router.get("/liveavatar/config")
@@ -1123,6 +1152,8 @@ async def liveavatar_speak(request: SpeakRequest):
     Retorna: transcribed_text, ai_response (para mostrar en historial)
     """
     lock = _get_session_lock(request.session_id)
+    # asyncio runs on a single thread — lock.locked() + acquire is effectively atomic
+    # within one event loop iteration (no OS-level thread preemption between these lines)
     if lock.locked():
         raise HTTPException(status_code=429, detail="Ya hay una respuesta en proceso. Esperá que Valeria termine.")
 
@@ -1133,8 +1164,12 @@ async def liveavatar_speak(request: SpeakRequest):
             if not elevenlabs_client:
                 raise HTTPException(status_code=503, detail="ElevenLabs not configured")
 
-            # Decode audio
-            audio_bytes = base64.b64decode(request.audio_base64)
+            # Validate and decode audio base64
+            try:
+                audio_bytes = base64.b64decode(request.audio_base64)
+            except Exception:
+                raise HTTPException(status_code=400, detail="Audio base64 inválido")
+
             logger.info(f"🎤 Received audio: {len(audio_bytes)} bytes for session {request.session_id[:8]}")
 
             # Step 1: STT
@@ -1142,7 +1177,8 @@ async def liveavatar_speak(request: SpeakRequest):
                 file=io.BytesIO(audio_bytes),
                 model_id="scribe_v1",
             )
-            user_text = (transcription.text if hasattr(transcription, "text") else str(transcription)).strip()
+            raw_text = transcription.text if hasattr(transcription, "text") else str(transcription)
+            user_text = raw_text.strip()[:2000]  # cap transcription length to avoid LLM token overflow
             logger.info(f"📝 Transcribed: {user_text}")
 
             if not user_text:
@@ -1212,8 +1248,11 @@ async def liveavatar_speak_text(request: TextSpeakRequest):
             if not liveavatar_service:
                 raise HTTPException(status_code=503, detail="LiveAvatar service not initialized")
 
+            user_text = request.text.strip()[:2000]  # cap input length
+            if not user_text:
+                raise HTTPException(status_code=400, detail="El texto no puede estar vacío")
             conv_id     = request.conversation_id or str(uuid.uuid4())
-            ai_response = await _build_valeria_response(request.text, conv_id)
+            ai_response = await _build_valeria_response(user_text, conv_id)
             logger.info(f"🤖 Text response: {ai_response[:80]}...")
 
             # TTS — generate MP3 (browser) and optionally PCM (lip-sync) concurrently
@@ -1320,10 +1359,4 @@ async def chat_with_knowledge_base(request: ChatRequest):
 # Include all API routes
 app.include_router(api_router)
 
-@app.on_event("startup")
-async def startup_db_client():
-    logger.info("✅ Application started successfully")
-
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    client.close()
+# Startup/shutdown handled by lifespan context manager above
