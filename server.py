@@ -1277,6 +1277,8 @@ async def close_liveavatar_session(session_id: str):
         if not liveavatar_service:
             raise HTTPException(status_code=503, detail="LiveAvatar service not initialized")
         success = await liveavatar_service.close_session(session_id)
+        # Limpiar el lock de la sesión para evitar memory leak
+        _session_locks.pop(session_id, None)
         return {"success": success}
     except Exception as e:
         logger.error(f"Error closing session: {e}")
