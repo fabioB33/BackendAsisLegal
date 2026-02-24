@@ -89,6 +89,14 @@ _db_path = str(ROOT_DIR / "prados.db")
 sqlite_kb = SQLiteKnowledgeBase(db_path=_db_path)
 liveavatar_service = LiveAvatarAPIService()
 
+# Per-session locks to prevent concurrent /liveavatar/speak calls
+_session_locks: dict = {}
+
+def _get_session_lock(session_id: str) -> asyncio.Lock:
+    if session_id not in _session_locks:
+        _session_locks[session_id] = asyncio.Lock()
+    return _session_locks[session_id]
+
 logger.info(f"✅ SQLite Knowledge Base initialized ({sqlite_kb.count_documents()} documents)")
 logger.info("✅ LiveAvatar Service initialized (liveavatar.com)")
 
@@ -1102,61 +1110,78 @@ async def liveavatar_speak(request: SpeakRequest):
 
     Retorna: transcribed_text, ai_response (para mostrar en historial)
     """
-    try:
-        if not liveavatar_service:
-            raise HTTPException(status_code=503, detail="LiveAvatar service not initialized")
-        if not elevenlabs_client:
-            raise HTTPException(status_code=503, detail="ElevenLabs not configured")
+    lock = _get_session_lock(request.session_id)
+    if lock.locked():
+        raise HTTPException(status_code=429, detail="Ya hay una respuesta en proceso. Esperá que Valeria termine.")
 
-        # Decode audio
-        audio_bytes = base64.b64decode(request.audio_base64)
-        logger.info(f"🎤 Received audio: {len(audio_bytes)} bytes for session {request.session_id[:8]}")
+    async with lock:
+        try:
+            if not liveavatar_service:
+                raise HTTPException(status_code=503, detail="LiveAvatar service not initialized")
+            if not elevenlabs_client:
+                raise HTTPException(status_code=503, detail="ElevenLabs not configured")
 
-        # Step 1: STT
-        transcription = elevenlabs_client.speech_to_text.convert(
-            file=io.BytesIO(audio_bytes),
-            model_id="scribe_v1",
-        )
-        user_text = (transcription.text if hasattr(transcription, "text") else str(transcription)).strip()
-        logger.info(f"📝 Transcribed: {user_text}")
+            # Decode audio
+            audio_bytes = base64.b64decode(request.audio_base64)
+            logger.info(f"🎤 Received audio: {len(audio_bytes)} bytes for session {request.session_id[:8]}")
 
-        if not user_text:
-            raise HTTPException(status_code=400, detail="No se pudo transcribir el audio")
+            # Step 1: STT
+            transcription = elevenlabs_client.speech_to_text.convert(
+                file=io.BytesIO(audio_bytes),
+                model_id="scribe_v1",
+            )
+            user_text = (transcription.text if hasattr(transcription, "text") else str(transcription)).strip()
+            logger.info(f"📝 Transcribed: {user_text}")
 
-        # Step 2: LLM
-        conv_id    = request.conversation_id or str(uuid.uuid4())
-        ai_response = await _build_valeria_response(user_text, conv_id)
-        logger.info(f"🤖 Response: {ai_response[:80]}...")
+            if not user_text:
+                raise HTTPException(status_code=400, detail="No se pudo transcribir el audio")
 
-        # Step 3: TTS → MP3 (for browser playback) + PCM (for avatar lip-sync)
-        mp3_bytes = await _tts_mp3(ai_response)
-        audio_b64 = base64.b64encode(mp3_bytes).decode("utf-8")
-        audio_url = f"data:audio/mpeg;base64,{audio_b64}"
-        logger.info(f"🔊 MP3 audio: {len(mp3_bytes)} bytes")
+            # Step 2: LLM
+            conv_id     = request.conversation_id or str(uuid.uuid4())
+            ai_response = await _build_valeria_response(user_text, conv_id)
+            logger.info(f"🤖 Response: {ai_response[:80]}...")
 
-        # Step 4: Send PCM to avatar for lip-sync (best-effort)
-        if liveavatar_service.is_connected(request.session_id):
-            try:
-                pcm_bytes = await _tts_pcm(ai_response)
-                await liveavatar_service.speak(request.session_id, pcm_bytes)
-            except Exception as e:
-                logger.warning(f"Avatar lip-sync failed (non-fatal): {e}")
-        else:
-            logger.warning(f"No WS connection for session {request.session_id[:8]} — lip-sync unavailable")
+            # Step 3: TTS — generate MP3 (browser) and optionally PCM (lip-sync) concurrently
+            ws_connected = liveavatar_service.is_connected(request.session_id)
+            if ws_connected:
+                try:
+                    mp3_bytes, pcm_bytes = await asyncio.gather(
+                        _tts_mp3(ai_response),
+                        _tts_pcm(ai_response),
+                    )
+                except Exception as e:
+                    logger.warning(f"Parallel TTS failed, falling back to MP3 only: {e}")
+                    mp3_bytes = await _tts_mp3(ai_response)
+                    pcm_bytes = None
+            else:
+                mp3_bytes = await _tts_mp3(ai_response)
+                pcm_bytes = None
+                logger.warning(f"No WS connection for session {request.session_id[:8]} — lip-sync unavailable")
 
-        return {
-            "success":         True,
-            "transcribed_text": user_text,
-            "ai_response":     ai_response,
-            "audio_url":       audio_url,
-            "conversation_id": conv_id,
-        }
+            audio_b64 = base64.b64encode(mp3_bytes).decode("utf-8")
+            audio_url = f"data:audio/mpeg;base64,{audio_b64}"
+            logger.info(f"🔊 MP3 audio: {len(mp3_bytes)} bytes")
 
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Error in /liveavatar/speak: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+            # Step 4: Send PCM to avatar for lip-sync (best-effort)
+            if ws_connected and pcm_bytes:
+                try:
+                    await liveavatar_service.speak(request.session_id, pcm_bytes)
+                except Exception as e:
+                    logger.warning(f"Avatar lip-sync failed (non-fatal): {e}")
+
+            return {
+                "success":          True,
+                "transcribed_text": user_text,
+                "ai_response":      ai_response,
+                "audio_url":        audio_url,
+                "conversation_id":  conv_id,
+            }
+
+        except HTTPException:
+            raise
+        except Exception as e:
+            logger.error(f"Error in /liveavatar/speak: {e}")
+            raise HTTPException(status_code=500, detail=str(e))
 
 
 @api_router.post("/liveavatar/speak-text")
@@ -1166,41 +1191,58 @@ async def liveavatar_speak_text(request: TextSpeakRequest):
     1. LLM genera respuesta
     2. TTS PCM → avatar lip-sync
     """
-    try:
-        if not liveavatar_service:
-            raise HTTPException(status_code=503, detail="LiveAvatar service not initialized")
+    lock = _get_session_lock(request.session_id)
+    if lock.locked():
+        raise HTTPException(status_code=429, detail="Ya hay una respuesta en proceso. Esperá que Valeria termine.")
 
-        conv_id    = request.conversation_id or str(uuid.uuid4())
-        ai_response = await _build_valeria_response(request.text, conv_id)
-        logger.info(f"🤖 Text response: {ai_response[:80]}...")
+    async with lock:
+        try:
+            if not liveavatar_service:
+                raise HTTPException(status_code=503, detail="LiveAvatar service not initialized")
 
-        # TTS → MP3 for browser playback
-        mp3_bytes = await _tts_mp3(ai_response)
-        audio_b64 = base64.b64encode(mp3_bytes).decode("utf-8")
-        audio_url = f"data:audio/mpeg;base64,{audio_b64}"
+            conv_id     = request.conversation_id or str(uuid.uuid4())
+            ai_response = await _build_valeria_response(request.text, conv_id)
+            logger.info(f"🤖 Text response: {ai_response[:80]}...")
 
-        # Send PCM to avatar for lip-sync (best-effort)
-        if liveavatar_service.is_connected(request.session_id):
-            try:
-                pcm_bytes = await _tts_pcm(ai_response)
-                await liveavatar_service.speak(request.session_id, pcm_bytes)
-            except Exception as e:
-                logger.warning(f"Avatar lip-sync failed (non-fatal): {e}")
-        else:
-            logger.warning(f"No WS for text-speak session {request.session_id[:8]}")
+            # TTS — generate MP3 (browser) and optionally PCM (lip-sync) concurrently
+            ws_connected = liveavatar_service.is_connected(request.session_id)
+            if ws_connected:
+                try:
+                    mp3_bytes, pcm_bytes = await asyncio.gather(
+                        _tts_mp3(ai_response),
+                        _tts_pcm(ai_response),
+                    )
+                except Exception as e:
+                    logger.warning(f"Parallel TTS failed, falling back to MP3 only: {e}")
+                    mp3_bytes = await _tts_mp3(ai_response)
+                    pcm_bytes = None
+            else:
+                mp3_bytes = await _tts_mp3(ai_response)
+                pcm_bytes = None
+                logger.warning(f"No WS for text-speak session {request.session_id[:8]}")
 
-        return {
-            "success":      True,
-            "ai_response":  ai_response,
-            "audio_url":    audio_url,
-            "conversation_id": conv_id,
-        }
+            audio_b64 = base64.b64encode(mp3_bytes).decode("utf-8")
+            audio_url = f"data:audio/mpeg;base64,{audio_b64}"
 
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Error in /liveavatar/speak-text: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+            # Send PCM to avatar for lip-sync (best-effort)
+            if ws_connected and pcm_bytes:
+                try:
+                    await liveavatar_service.speak(request.session_id, pcm_bytes)
+                except Exception as e:
+                    logger.warning(f"Avatar lip-sync failed (non-fatal): {e}")
+
+            return {
+                "success":         True,
+                "ai_response":     ai_response,
+                "audio_url":       audio_url,
+                "conversation_id": conv_id,
+            }
+
+        except HTTPException:
+            raise
+        except Exception as e:
+            logger.error(f"Error in /liveavatar/speak-text: {e}")
+            raise HTTPException(status_code=500, detail=str(e))
 
 
 @api_router.post("/liveavatar/interrupt")
