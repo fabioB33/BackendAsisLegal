@@ -101,10 +101,11 @@ app = FastAPI()
 
 # ⚠️ CONFIGURACIÓN CRÍTICA DE CORS
 origins = [
-    "https://legbotdev.pradosdeparaiso.com.pe",  # Dominio de producción
-    "https://frontendAsisLegal.onrender.com",    # Frontend en Render
-    "https://frontendasislegal.onrender.com",    # Frontend en Render (lowercase)
-    "http://localhost:3000",                     # Desarrollo local
+    "https://legbotdev.pradosdeparaiso.com.pe",       # Dominio de producción
+    "https://frontendAsisLegal.onrender.com",          # Frontend en Render
+    "https://frontendasislegal.onrender.com",          # Frontend en Render (lowercase)
+    "https://verdant-paletas-4473ea.netlify.app",      # Frontend en Netlify
+    "http://localhost:3000",                           # Desarrollo local
 ]
 
 app.add_middleware(
