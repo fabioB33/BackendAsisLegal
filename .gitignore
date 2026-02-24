@@ -1,0 +1,16 @@
+# Environment variables — NUNCA subir al repo
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+venv/
+.venv/
+*.egg-info/
+
+# Base de datos local
+*.db
+
+# Archivos rotos / temporales
+*.broken
