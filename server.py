@@ -126,43 +126,47 @@ app.add_middleware(
 
 api_router = APIRouter(prefix="/api")
 
-# Información legal precargada (debe coincidir con base de conocimientos de ElevenLabs)
+# Información legal de Prados de Paraíso (usada como fallback en endpoints secundarios)
 LEGAL_INFO = """
-Eres un asistente legal muy útil. Utiliza la información que tienes en tu base de conocimientos para contestar las preguntas.
+PRADOS DE PARAÍSO — Proyecto inmobiliario en Pachacamac, Lima, Perú.
+Respaldado por Notaría Tambini y Casahierro Abogados.
 
-Utiliza el archivo documentacion/CorregidoLegal.docx para contestar todas las preguntas del usuario si no encontrás las respuestas seguí con el resto.
+1. CONDICIÓN LEGAL DEL TERRENO:
+- 50% del terreno: Propiedad adquirida mediante compraventa de acciones y derechos, con escrituras públicas desde 1998.
+- 50% restante: Posesión legítima y mediata de buena fe, ejercida continuamente desde 1998.
+- El predio figura a nombre de DIREFOR (entidad estatal), pero la empresa posee legítimamente desde hace más de 25 años.
 
-Base de Conocimientos - Prados de Paraíso:
-
-[AQUÍ debes agregar TODO el contenido de tu archivo CorregidoLegal.docx]
-
-1. CONDICIÓN LEGAL DEL PROYECTO:
-- 50% del terreno: Propiedad adquirida mediante compraventa de acciones y derechos
-- 50% restante: Terreno bajo condición de posesión legítima y mediata
-
-2. DIFERENCIA ENTRE PROPIEDAD Y POSESIÓN:
-- Propiedad: Derecho que otorga titularidad legal inscribible en Registros Públicos
-- Posesión: Ejercicio de hecho de poderes inherentes a la propiedad
+2. QUÉ RECIBE EL COMPRADOR:
+Contrato de transferencia de POSESIÓN (no título de propiedad en primera instancia).
+Para obtener el título inscrito en SUNARP el propietario gestiona el saneamiento legal al completar el pago total.
 
 3. PREGUNTAS FRECUENTES:
 
-Q1: Cuándo entregan el título de propiedad?
-R: La condición legal es la POSESIÓN. Se entrega contrato de transferencia de posesión. Para obtener título de propiedad, el cliente debe gestionar saneamiento tras completar pago.
+Q: ¿Cuándo entregan el título de propiedad?
+R: Al comprar se entrega contrato de transferencia de posesión. El título SUNARP se obtiene gestionando el saneamiento legal tras completar el pago. El equipo legal acompaña ese proceso.
 
-Q2: En qué estado se encuentra el lote?
-R: Posesión legítima, mediata y de buena fe, respaldada por escrituras públicas desde 1998.
+Q: ¿Tienen partida registral en SUNARP?
+R: No a nombre de la desarrolladora. El predio figura a nombre de DIREFOR. Esto no representa riesgo porque poseemos legítimamente desde 1998, respaldados por escrituras públicas notariales.
 
-Q3: Tenemos partida registral?
-R: No hay partida registral a nombre de la desarrolladora. El predio figura a nombre de DIREFOR (entidad estatal). Esto no representa riesgo ya que poseemos legítimamente desde 1998.
+Q: ¿Es seguro comprar sin partida registral?
+R: Sí. La posesión legítima de más de 25 años con escrituras públicas desde 1998 es un derecho real protegido por la ley peruana. El respaldo es Notaría Tambini y Casahierro Abogados.
 
-Q4: Tipos de posesión?
-R: Legítima (mediata e inmediata) e Ilegítima (buena fe, mala fe, precaria). Nuestra situación: Posesión Legítima Mediata y de Buena Fe.
+Q: ¿Puedo construir en el terreno con posesión?
+R: Sí. El poseedor legítimo tiene todos los derechos de uso, disfrute y construcción sobre el terreno.
 
-Q5: Por qué no hay partida registral?
-R: Decisión estratégica comercial. La posesión es un derecho reconocido y protegido por ley.
-'''
-- Notaría Tambini
-- Casahierro Abogados
+Q: ¿Puedo revender el lote?
+R: Sí, el contrato de posesión es transferible. Se recomienda completar el saneamiento primero para obtener mejor precio.
+
+Q: ¿Tipos de posesión?
+R: Legítima (mediata e inmediata) e Ilegítima (buena fe, mala fe, precaria). Prados de Paraíso: Posesión Legítima Mediata de Buena Fe — la categoría más sólida.
+
+4. PROCESO DE COMPRA:
+1. Separación del lote con pago inicial
+2. Verificación de documentos legales
+3. Firma de contrato de transferencia de posesión
+4. Pago en cuotas según plan acordado
+5. Gestión de saneamiento para título SUNARP al completar pago
+6. Inscripción definitiva en Registros Públicos
 """
 
 # Models
@@ -965,15 +969,23 @@ class TextSpeakRequest(BaseModel):
 
 VALERIA_SYSTEM = '''Eres Valeria, asistente legal de Prados de Paraíso, proyecto inmobiliario en Pachacamac, Lima, Perú.
 
+Tu función es responder las dudas legales de clientes potenciales que están considerando comprar un lote. Tu objetivo es generar confianza y resolver inquietudes sobre la condición legal del proyecto de manera clara y tranquilizadora, siempre con fundamento real.
+
 REGLA ABSOLUTA: Responde SIEMPRE en exactamente 3 a 5 oraciones cortas. Ni una más. Tus respuestas se convierten a audio, así que deben ser breves y fluidas.
 
 FORMATO OBLIGATORIO:
 - Texto plano continuo, sin listas, sin guiones, sin asteriscos, sin numeraciones, sin títulos.
 - Solo oraciones completas separadas por punto.
-- Tono cálido y directo, como una llamada telefónica.
-- Español peruano natural.
+- Tono cálido, profesional y tranquilizador, como una llamada telefónica de confianza.
+- Español peruano natural. Evitá tecnicismos innecesarios; si usás términos legales, explicalos en la misma oración.
 
-Si no encontrás información específica en la base de conocimientos, respondé con lo que sabés del proyecto en máximo 3 oraciones y ofrecé derivar al equipo legal.
+CONTEXTO DEL PROYECTO:
+- El comprador recibe un contrato de transferencia de posesión (no título directo). El título SUNARP se gestiona al completar el pago.
+- No hay partida registral a nombre de la desarrolladora (el predio está a nombre de DIREFOR, entidad estatal). Esto es legal y no representa riesgo.
+- La posesión es legítima, mediata y de buena fe desde 1998, respaldada por escrituras públicas y Notaría Tambini.
+- Si el cliente pregunta sobre precios o condiciones de pago, indicá que debe consultar con el equipo de ventas.
+
+Si no encontrás información específica en la base de conocimientos, respondé con lo que sabés del proyecto en máximo 3 oraciones y ofrecé derivar al equipo legal o de ventas.
 '''
 
 def _truncate_to_sentences(text: str, max_sentences: int = 5) -> str:
