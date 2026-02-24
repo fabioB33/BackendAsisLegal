@@ -984,22 +984,20 @@ def _truncate_to_sentences(text: str, max_sentences: int = 5) -> str:
 
 async def _build_valeria_response(user_text: str, conversation_id: str) -> str:
     """STT ya hecho. Búsqueda semántica + LLM → texto de respuesta."""
-    relevant_docs = sqlite_kb.search(query=user_text, top_k=2)
+    relevant_docs = sqlite_kb.search(query=user_text, top_k=3)
     context_parts = []
+    import re
     for i, doc in enumerate(relevant_docs, 1):
-        if doc['score'] > 0.15:
-            # Eliminar formato de listas del contexto antes de pasarlo al LLM
-            import re
-            clean = re.sub(r'^\s*[-\d]+[.)]\s+', '', doc['contenido'], flags=re.MULTILINE)
-            clean = re.sub(r'\*+', '', clean)
-            context_parts.append(f"Información {i} ({doc['titulo']}): {clean[:350]}")
+        clean = re.sub(r'^\s*[-\d]+[.)]\s+', '', doc['contenido'], flags=re.MULTILINE)
+        clean = re.sub(r'\*+', '', clean)
+        context_parts.append(f"Información {i} ({doc['titulo']}):\n{clean[:800]}")
 
-    context = "\n".join(context_parts) if context_parts else "Usa tu conocimiento general sobre el proyecto."
+    context = "\n\n".join(context_parts) if context_parts else "Usa tu conocimiento general sobre el proyecto."
 
     response = await litellm.acompletion(
         model=f"{LLM_MODEL_PROVIDER}/{LLM_MODEL_NAME}",
         api_key=LLM_KEY,
-        max_tokens=160,
+        max_tokens=220,
         messages=[
             {"role": "system", "content": VALERIA_SYSTEM + f"\nINFORMACIÓN DISPONIBLE:\n{context}"},
             {"role": "user", "content": user_text},
