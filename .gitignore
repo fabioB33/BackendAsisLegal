@@ -9,8 +9,8 @@ venv/
 .venv/
 *.egg-info/
 
-# Base de datos local
-*.db
+# Base de datos local (excepto prados.db que es la knowledge base)
+# *.db
 
 # Archivos rotos / temporales
 *.broken
