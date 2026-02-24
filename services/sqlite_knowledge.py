@@ -26,11 +26,8 @@ class SQLiteKnowledgeBase:
         
         # Inicializar base de datos
         self._init_database()
-        
-        # Cargar modelo de embeddings
-        self._load_model()
-        
-        logger.info(f"✅ SQLite KnowledgeBase initialized at {db_path}")
+
+        logger.info(f"✅ SQLite KnowledgeBase initialized at {db_path} (model loads on first use)")
     
     def _init_database(self):
         """Crea la base de datos y tablas si no existen"""
@@ -65,14 +62,17 @@ class SQLiteKnowledgeBase:
             logger.error(f"Error initializing database: {str(e)}")
             raise
     
-    def _load_model(self):
-        """Carga el modelo de sentence transformers"""
-        try:
-            self.model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
-            logger.info("✅ Sentence transformer model loaded")
-        except Exception as e:
-            logger.error(f"Error loading model: {str(e)}")
-            raise
+    def _get_model(self):
+        """Carga el modelo de sentence transformers de forma lazy (solo cuando se necesita)"""
+        if self.model is None:
+            try:
+                logger.info("Loading sentence transformer model...")
+                self.model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
+                logger.info("✅ Sentence transformer model loaded")
+            except Exception as e:
+                logger.error(f"Error loading model: {str(e)}")
+                raise
+        return self.model
     
     def _get_connection(self):
         """Obtiene una conexión a la base de datos"""
@@ -89,7 +89,7 @@ class SQLiteKnowledgeBase:
         """
         try:
             # Generar embedding
-            embedding = self.model.encode(contenido).tolist()
+            embedding = self._get_model().encode(contenido).tolist()
             embedding_json = json.dumps(embedding)
             
             # Convertir metadata a JSON
@@ -128,7 +128,7 @@ class SQLiteKnowledgeBase:
         """
         try:
             # Generar embedding de la consulta
-            query_embedding = self.model.encode(query)
+            query_embedding = self._get_model().encode(query)
             
             # Obtener todos los documentos
             conn = self._get_connection()
