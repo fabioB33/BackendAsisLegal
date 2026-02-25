@@ -67,7 +67,7 @@ OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 # Prioridad: Gemini > OpenAI > Emergent
 LLM_KEY = GEMINI_API_KEY or OPENAI_API_KEY or EMERGENT_LLM_KEY
 LLM_MODEL_PROVIDER = "gemini" if GEMINI_API_KEY else "openai"
-LLM_MODEL_NAME = "gemini-2.5-flash-lite" if GEMINI_API_KEY else "gpt-4o-mini"
+LLM_MODEL_NAME = "gemini-1.5-flash" if GEMINI_API_KEY else "gpt-4o-mini"  # 1500 req/day free vs 20 for gemini-2.5-flash-lite
 HEYGEN_API_KEY = os.environ.get('HEYGEN_API_KEY', '')
 ELEVENLABS_API_KEY = os.environ.get('ELEVENLABS_API_KEY', '')
 
@@ -1037,16 +1037,26 @@ async def _build_valeria_response(user_text: str, conversation_id: str) -> str:
 
     context = "\n\n".join(context_parts) if context_parts else "Usa tu conocimiento general sobre el proyecto."
 
-    response = await litellm.acompletion(
-        model=f"{LLM_MODEL_PROVIDER}/{LLM_MODEL_NAME}",
-        api_key=LLM_KEY,
-        max_tokens=220,
-        messages=[
-            {"role": "system", "content": VALERIA_SYSTEM + f"\nINFORMACIÓN DISPONIBLE:\n{context}"},
-            {"role": "user", "content": user_text},
-        ],
-    )
-    raw = response.choices[0].message.content.strip()
+    try:
+        response = await litellm.acompletion(
+            model=f"{LLM_MODEL_PROVIDER}/{LLM_MODEL_NAME}",
+            api_key=LLM_KEY,
+            max_tokens=220,
+            messages=[
+                {"role": "system", "content": VALERIA_SYSTEM + f"\nINFORMACIÓN DISPONIBLE:\n{context}"},
+                {"role": "user", "content": user_text},
+            ],
+        )
+        raw = response.choices[0].message.content.strip()
+    except Exception as e:
+        err_str = str(e).lower()
+        if "429" in err_str or "quota" in err_str or "rate" in err_str:
+            logger.warning(f"LLM rate limit hit: {e}")
+            raise HTTPException(
+                status_code=503,
+                detail="El asistente está temporalmente ocupado. Por favor intentá de nuevo en unos segundos."
+            )
+        raise
     # Garantizar máximo 5 oraciones aunque el LLM no respete la regla
     return _truncate_to_sentences(raw, max_sentences=5)
 
