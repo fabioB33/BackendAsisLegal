@@ -98,10 +98,19 @@ liveavatar_service = LiveAvatarAPIService()
 
 # Per-session locks to prevent concurrent /liveavatar/speak calls
 _session_locks: dict = {}
+_session_lock_times: dict = {}  # tracks last-used timestamp for cleanup
 
 def _get_session_lock(session_id: str) -> asyncio.Lock:
+    import time as _time
     if session_id not in _session_locks:
         _session_locks[session_id] = asyncio.Lock()
+    _session_lock_times[session_id] = _time.monotonic()
+    # Prune locks idle for more than 2 hours (browser closed without DELETE)
+    cutoff = _time.monotonic() - 7200
+    stale = [sid for sid, t in _session_lock_times.items() if t < cutoff]
+    for sid in stale:
+        _session_locks.pop(sid, None)
+        _session_lock_times.pop(sid, None)
     return _session_locks[session_id]
 
 logger.info(f"✅ SQLite Knowledge Base initialized ({sqlite_kb.count_documents()} documents)")
@@ -581,7 +590,7 @@ async def text_to_speech(request: dict):
         }
         
     except Exception as e:
-        logger.error(f"Error in TTS: {str(e)}")
+        logger.error(f"Error in TTS: {str(e)}", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
 
 # Voice Chat Endpoint (Push-to-Talk)
@@ -690,6 +699,8 @@ async def text_chat(request: dict):
         text = request.get('text', '').strip()
         if not text:
             raise HTTPException(status_code=400, detail="Text is required")
+        if len(text) > 2000:
+            raise HTTPException(status_code=400, detail="El texto no puede superar 2000 caracteres")
         
         logger.info(f"💬 Text chat request: {text}")
         
@@ -1320,7 +1331,7 @@ async def liveavatar_speak_text(request: TextSpeakRequest):
         except HTTPException:
             raise
         except Exception as e:
-            logger.error(f"Error in /liveavatar/speak-text: {e}")
+            logger.error(f"Error in /liveavatar/speak-text: {e}", exc_info=True)
             raise HTTPException(status_code=500, detail=str(e))
 
 
@@ -1377,7 +1388,7 @@ async def chat_with_knowledge_base(request: ChatRequest):
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Error in /chat: {e}")
+        logger.error(f"Error in /chat: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Error processing chat: {str(e)}")
 
 # ============================================================================
