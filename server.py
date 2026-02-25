@@ -141,7 +141,7 @@ app.add_middleware(
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["GET", "POST", "DELETE", "OPTIONS"],
-    allow_headers=["*"],
+    allow_headers=["Content-Type", "Authorization", "X-Requested-With"],
 )
 
 api_router = APIRouter(prefix="/api")
@@ -370,6 +370,11 @@ indica que el usuario debe consultar con el equipo legal.'''
 
 @api_router.get("/messages/{conversation_id}", response_model=List[Message])
 async def get_messages(conversation_id: str):
+    import uuid as _uuid
+    try:
+        _uuid.UUID(conversation_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="conversation_id inválido")
     messages = await db.messages.find(
         {"conversation_id": conversation_id},
         {"_id": 0}
@@ -387,6 +392,11 @@ async def upload_document(
     user_id: str = Form(...)
 ):
     try:
+        # Validate MIME type — only accept text/plain, text/markdown, application/pdf
+        ALLOWED_MIME = {"text/plain", "text/markdown", "application/pdf", "text/csv"}
+        ct = (file.content_type or "").split(";")[0].strip().lower()
+        if ct and ct not in ALLOWED_MIME:
+            raise HTTPException(status_code=415, detail=f"Tipo de archivo no permitido: {ct}")
         # Read with size limit — reject files larger than 5 MB
         MAX_UPLOAD_BYTES = 5 * 1024 * 1024
         content = await file.read(MAX_UPLOAD_BYTES + 1)
@@ -421,7 +431,10 @@ async def get_user_documents(user_id: str):
 
 # Analytics routes
 @api_router.get("/analytics/overview")
-async def get_analytics():
+async def get_analytics(x_admin_key: Optional[str] = None):
+    _admin_key = os.environ.get("ADMIN_API_KEY", "")
+    if _admin_key and x_admin_key != _admin_key:
+        raise HTTPException(status_code=403, detail="Acceso no autorizado")
     try:
         total_users = await db.users.count_documents({})
         total_conversations = await db.conversations.count_documents({})
@@ -499,8 +512,12 @@ async def export_conversation(conversation_id: str):
 @api_router.get("/search")
 async def search_conversations(q: str, user_id: Optional[str] = None):
     try:
-        # Search in messages
-        query = {"content": {"$regex": q, "$options": "i"}}
+        import re as _re
+        # Escape regex special chars to prevent ReDoS
+        safe_q = _re.escape(q[:200]) if q else ""
+        if not safe_q:
+            return {"conversations": [], "message_matches": 0}
+        query = {"content": {"$regex": safe_q, "$options": "i"}}
         messages = await db.messages.find(query, {"_id": 0}).limit(50).to_list(50)
         
         # Get unique conversation IDs
@@ -654,7 +671,7 @@ con el equipo legal.'''
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"❌ Error in voice chat: {str(e)}")
+        logger.error(f"❌ Error in voice chat: {str(e)}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Error procesando consulta de voz: {str(e)}")
 
 # Text Chat Endpoint (alternative to voice)
@@ -700,13 +717,10 @@ indica que el usuario debe consultar con el equipo legal.'''
         audio_url = None
         if elevenlabs_client:
             try:
-                # Use Lina - Warm Latin American female voice (works well for Peruvian Spanish)
-                agent_voice_id = "VmejBeYhbrcTPwDniox7"  # Lina voice
-                
-                logger.info(f"🔊 Converting response to speech with Lina (streaming mode)...")
+                logger.info(f"🔊 Converting response to speech (streaming mode)...")
                 audio_stream = elevenlabs_client.text_to_speech.stream(
                     text=ai_response,
-                    voice_id=agent_voice_id,
+                    voice_id=ELEVENLABS_VOICE_ID,
                     model_id="eleven_multilingual_v2",
                     voice_settings=VoiceSettings(
                         stability=0.6,
@@ -736,7 +750,7 @@ indica que el usuario debe consultar con el equipo legal.'''
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Error in text chat: {str(e)}")
+        logger.error(f"Error in text chat: {str(e)}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Error procesando consulta: {str(e)}")
 
 
@@ -1175,7 +1189,10 @@ async def liveavatar_speak(request: SpeakRequest):
             if not elevenlabs_client:
                 raise HTTPException(status_code=503, detail="ElevenLabs not configured")
 
-            # Validate and decode audio base64
+            # Validate and decode audio base64 — reject oversized payloads (5 MB max)
+            MAX_AUDIO_B64 = 5 * 1024 * 1024 * 4 // 3  # ~6.7 MB base64 → 5 MB binary
+            if len(request.audio_base64) > MAX_AUDIO_B64:
+                raise HTTPException(status_code=413, detail="Audio demasiado largo (máx 5 MB)")
             try:
                 audio_bytes = base64.b64decode(request.audio_base64)
             except Exception:
@@ -1239,7 +1256,7 @@ async def liveavatar_speak(request: SpeakRequest):
         except HTTPException:
             raise
         except Exception as e:
-            logger.error(f"Error in /liveavatar/speak: {e}")
+            logger.error(f"Error in /liveavatar/speak: {e}", exc_info=True)
             raise HTTPException(status_code=500, detail=str(e))
 
 
