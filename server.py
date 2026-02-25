@@ -65,9 +65,9 @@ EMERGENT_LLM_KEY = os.environ.get('EMERGENT_LLM_KEY')
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 # Prioridad: Gemini > OpenAI > Emergent
-LLM_KEY = GEMINI_API_KEY or OPENAI_API_KEY or EMERGENT_LLM_KEY
-LLM_MODEL_PROVIDER = "gemini" if GEMINI_API_KEY else "openai"
-LLM_MODEL_NAME = "gemini-1.5-flash" if GEMINI_API_KEY else "gpt-4o-mini"  # 1500 req/day free vs 20 for gemini-2.5-flash-lite
+LLM_KEY = OPENAI_API_KEY or GEMINI_API_KEY or EMERGENT_LLM_KEY
+LLM_MODEL_PROVIDER = "openai" if OPENAI_API_KEY else "gemini"
+LLM_MODEL_NAME = "gpt-4o-mini" if OPENAI_API_KEY else "gemini-1.5-flash"
 HEYGEN_API_KEY = os.environ.get('HEYGEN_API_KEY', '')
 ELEVENLABS_API_KEY = os.environ.get('ELEVENLABS_API_KEY', '')
 
