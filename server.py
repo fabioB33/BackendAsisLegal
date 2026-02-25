@@ -413,15 +413,16 @@ async def upload_document(
             raise HTTPException(status_code=413, detail="El archivo supera el límite de 5 MB")
         content_str = content.decode('utf-8', errors='ignore')
 
+        safe_filename = Path(file.filename).name if file.filename else "upload"
         doc = Document(
             user_id=user_id,
-            filename=file.filename,
+            filename=safe_filename,
             content=content_str[:10000]  # Limit size
         )
         doc_dict = prepare_for_mongo(doc.model_dump())
         await db.documents.insert_one(doc_dict)
-        
-        return {"success": True, "document_id": doc.id, "filename": file.filename}
+
+        return {"success": True, "document_id": doc.id, "filename": safe_filename}
     except Exception as e:
         logger.error(f"Error uploading document: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
