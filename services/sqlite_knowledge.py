@@ -99,6 +99,19 @@ class SQLiteKnowledgeBase:
             logger.error(f"Error searching: {str(e)}")
             return []
 
+    def get_all_documents_full(self) -> List[Dict]:
+        """Devuelve todos los documentos con contenido completo (sin truncar)."""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                cursor = conn.cursor()
+                cursor.execute('SELECT id, titulo, contenido FROM conocimiento_legal')
+                rows = cursor.fetchall()
+            return [{'id': doc_id, 'titulo': titulo, 'contenido': contenido}
+                    for doc_id, titulo, contenido in rows]
+        except Exception as e:
+            logger.error(f"Error getting all documents: {str(e)}")
+            return []
+
     def get_all_documents(self) -> List[Dict]:
         try:
             with sqlite3.connect(self.db_path) as conn:

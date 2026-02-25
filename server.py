@@ -1021,7 +1021,9 @@ VALERIA_SYSTEM = '''Eres Valeria, asistente legal de Prados de Paraíso, proyect
 
 Tu función es responder las dudas legales de clientes potenciales que están considerando comprar un lote. Tu objetivo es generar confianza y resolver inquietudes sobre la condición legal del proyecto de manera clara y tranquilizadora, siempre con fundamento real.
 
-REGLA ABSOLUTA: Responde SIEMPRE en exactamente 3 a 5 oraciones cortas. Ni una más. Tus respuestas se convierten a audio, así que deben ser breves y fluidas.
+REGLA ABSOLUTA DE CONOCIMIENTO: Basá SIEMPRE tus respuestas en la BASE DE CONOCIMIENTOS PRINCIPAL que se te proporciona. Esa es la fuente oficial y única del proyecto. NO uses conocimiento genérico sobre derecho inmobiliario si contradice o va más allá de lo que dice la base de conocimientos.
+
+REGLA ABSOLUTA DE FORMATO: Responde SIEMPRE en exactamente 3 a 5 oraciones cortas. Ni una más. Tus respuestas se convierten a audio, así que deben ser breves y fluidas.
 
 FORMATO OBLIGATORIO:
 - Texto plano continuo, sin listas, sin guiones, sin asteriscos, sin numeraciones, sin títulos.
@@ -1029,7 +1031,7 @@ FORMATO OBLIGATORIO:
 - Tono cálido, profesional y tranquilizador, como una llamada telefónica de confianza.
 - Español peruano natural. Evitá tecnicismos innecesarios; si usás términos legales, explicalos en la misma oración.
 
-CONTEXTO DEL PROYECTO:
+DATOS CLAVE DEL PROYECTO (siempre válidos):
 - El comprador recibe un contrato de transferencia de posesión (no título directo). El título SUNARP se gestiona al completar el pago.
 - No hay partida registral a nombre de la desarrolladora (el predio está a nombre de DIREFOR, entidad estatal). Esto es legal y no representa riesgo.
 - La posesión es legítima, mediata y de buena fe desde 1998, respaldada por escrituras públicas y Notaría Tambini.
@@ -1054,13 +1056,31 @@ def _truncate_to_sentences(text: str, max_sentences: int = 5) -> str:
 
 async def _build_valeria_response(user_text: str, conversation_id: str) -> str:
     """STT ya hecho. Búsqueda semántica + LLM → texto de respuesta."""
-    relevant_docs = sqlite_kb.search(query=user_text, top_k=3)
-    context_parts = []
     import re
-    for i, doc in enumerate(relevant_docs, 1):
+
+    all_docs = sqlite_kb.get_all_documents_full()
+    relevant_docs = sqlite_kb.search(query=user_text, top_k=5)
+
+    # Siempre incluir el doc principal completo (Condiciones Legales de Prados de Paraíso)
+    # Es el documento con la información más específica y crítica del proyecto
+    MAIN_DOC_TITULO = "Condiciones Legales de Prados de Paraíso"
+    context_parts = []
+
+    # 1. Documento principal — siempre presente, sin truncar
+    main_doc = next((d for d in all_docs if MAIN_DOC_TITULO in d.get('titulo', '')), None)
+    if main_doc:
+        clean = re.sub(r'\*+', '', main_doc['contenido'])
+        context_parts.append(f"BASE DE CONOCIMIENTOS PRINCIPAL ({main_doc['titulo']}):\n{clean}")
+
+    # 2. Docs relevantes adicionales — sin el principal (ya incluido), sin truncar
+    seen_ids = {main_doc['id']} if main_doc else set()
+    for doc in relevant_docs:
+        if doc['id'] in seen_ids:
+            continue
+        seen_ids.add(doc['id'])
         clean = re.sub(r'^\s*[-\d]+[.)]\s+', '', doc['contenido'], flags=re.MULTILINE)
         clean = re.sub(r'\*+', '', clean)
-        context_parts.append(f"Información {i} ({doc['titulo']}):\n{clean[:800]}")
+        context_parts.append(f"Información adicional ({doc['titulo']}):\n{clean}")
 
     context = "\n\n".join(context_parts) if context_parts else "Usa tu conocimiento general sobre el proyecto."
 
