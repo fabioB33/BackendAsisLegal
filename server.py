@@ -132,6 +132,7 @@ origins = [
     "https://frontendAsisLegal.onrender.com",          # Frontend en Render
     "https://frontendasislegal.onrender.com",          # Frontend en Render (lowercase)
     "https://verdant-paletas-4473ea.netlify.app",      # Frontend en Netlify
+    "https://frontend-asis-legal.vercel.app",          # Frontend en Vercel
     "http://localhost:3000",                           # Desarrollo local
 ]
 
