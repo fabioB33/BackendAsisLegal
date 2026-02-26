@@ -478,6 +478,32 @@ def prepare_for_mongo(data: dict) -> dict:
 async def root():
     return {"message": "Prados de Paraíso Legal Hub API"}
 
+@api_router.get("/diagnostics")
+async def diagnostics():
+    """Endpoint de diagnóstico — muestra estado de servicios sin revelar keys."""
+    import asyncio
+    result = {
+        "llm_provider": LLM_MODEL_PROVIDER,
+        "llm_model": LLM_MODEL_NAME,
+        "llm_key_set": bool(LLM_KEY),
+        "elevenlabs_key_set": bool(ELEVENLABS_API_KEY),
+        "llm_test": None,
+        "llm_error": None,
+    }
+    if LLM_KEY:
+        try:
+            resp = await litellm.acompletion(
+                model=f"{LLM_MODEL_PROVIDER}/{LLM_MODEL_NAME}",
+                api_key=LLM_KEY,
+                max_tokens=5,
+                messages=[{"role": "user", "content": "di hola"}],
+            )
+            result["llm_test"] = "OK"
+        except Exception as e:
+            result["llm_test"] = "FAIL"
+            result["llm_error"] = str(e)[:300]
+    return result
+
 # User routes
 @api_router.post("/users", response_model=User)
 async def create_user(user: UserCreate):
