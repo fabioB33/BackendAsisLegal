@@ -123,90 +123,220 @@ HEYGEN_AVATAR_ID = os.environ.get('HEYGEN_AVATAR_ID', '')
 
 from contextlib import asynccontextmanager
 
-CONDICIONES_LEGALES_CONTENT = """
-CONDICIONES LEGALES ESPECÍFICAS DE PRADOS DE PARAÍSO - PACHACAMAC, LIMA, PERÚ
+# Documentos oficiales de la base de conocimientos — se sincronizan al startup
+_KB_SEED_DOCS = [
+    {
+        "titulo": "Prados de Paraíso - Base de Conocimientos Oficial (Preguntas 1 a 30)",
+        "marker": "Desarrolladora Santa María del Norte SAC",  # detectar si ya es la versión oficial
+        "contenido": """BASE DE CONOCIMIENTOS OFICIAL - PRADOS DE PARAÍSO
 
-1. QUÉ ES PRADOS DE PARAÍSO:
-Prados de Paraíso es un proyecto inmobiliario de vivienda ecológica y sostenible ubicado en Pachacamac, Lima, Perú. Ofrece lotes para la construcción de viviendas, con un enfoque en la calidad y el desarrollo urbano. Está respaldado por Notaría Tambini y Casahierro Abogados.
+1. ¿Qué es Prados de Paraíso?
+Prados de Paraíso es una marca comercial de Desarrolladora Santa María del Norte SAC, dedicada a desarrollar proyectos inmobiliarios con un enfoque ecológico y sostenible. Busca innovar en el sector, combinando eficiencia ambiental, diseño funcional y calidad de vida. Responde a la demanda de estilos de vida responsables y un desarrollo inmobiliario consciente.
 
-2. CONDICIÓN LEGAL DEL TERRENO:
-El proyecto tiene una condición legal mixta:
-- 50% del terreno: Propiedad adquirida mediante compraventa de acciones y derechos, con escrituras públicas desde 1998.
-- 50% restante: Terreno bajo condición de posesión legítima y mediata, ejercida de buena fe desde 1998.
-El predio figura registralmente a nombre de DIREFOR (entidad estatal), pero la empresa posee legítimamente desde hace más de 25 años.
+2. ¿Qué proyectos tiene Prados del Paraíso?
+Actualmente, la marca Prados de Paraíso cuenta con dos proyectos. Uno exitosamente entregado, denominado "Prados de Paraíso – Casa Huerto Ecológico"; y el segundo proyecto: "Prados de Paraíso Villa Eco-Sostenible", el cual se encuentra en desarrollo. Ambos proyectos están respaldados por una sólida trayectoria en el mercado inmobiliario y buscan ofrecer oportunidades de inversión segura con visión de futuro.
 
-3. QUÉ RECIBE EL COMPRADOR:
-El comprador recibe un contrato de transferencia de posesión (NO un título de propiedad en primera instancia). Para obtener el título de propiedad inscrito en Registros Públicos (SUNARP), el propietario debe gestionar el saneamiento legal una vez completado el pago total.
+3. ¿Dónde se ubica el proyecto Villa Eco-Sostenible?
+El proyecto Villa Eco-Sostenible se encuentra ubicado a la altura del 137.25 Km de la Carretera Panamericana Norte, distrito de Santa María, Provincia de Huaura y Departamento de Lima.
 
-4. DIFERENCIA ENTRE PROPIEDAD Y POSESIÓN:
-- Propiedad: Derecho que otorga titularidad legal inscribible en Registros Públicos (SUNARP). Requiere partida registral.
-- Posesión legítima: Ejercicio de hecho de poderes inherentes a la propiedad. Reconocida y protegida por el Código Civil peruano.
-La posesión de Prados de Paraíso es LEGÍTIMA, MEDIATA y de BUENA FE — la más sólida categoría posesoria.
+4. ¿Quién desarrolla el proyecto?
+El proyecto es promovido por Desarrolladora Santa María del Norte S.A.C., una empresa con experiencia en el mercado inmobiliario. Además, cuenta con el respaldo y asesoramiento legal de DS CASAHIERRO ABOGADOS y tiene un convenio con la NOTARIA TAMBINI para garantizar la transparencia y seguridad jurídica en los procesos.
 
-5. PREGUNTAS FRECUENTES REALES:
+5. ¿La empresa es formal?
+Sí, la empresa es formal y cuenta con el respaldo de la marca Prados de Paraíso, el cual tiene una trayectoria sólida en el desarrollo de proyectos inmobiliarios. Además, se encuentra inscrita en la Partida Electrónica N° 15437655 del Registro de Personas Jurídicas de Lima.
 
-Q: ¿Cuándo entregan el título de propiedad?
-R: La condición legal actual es la POSESIÓN. Al comprar, se entrega contrato de transferencia de posesión. Para obtener el título de propiedad inscrito en SUNARP, el propietario debe gestionar el saneamiento legal tras completar el pago total. El equipo legal de Prados de Paraíso acompaña este proceso.
+6. ¿Desde cuándo existe el proyecto?
+El proyecto "Villa Eco-Sostenible" inicia en octubre del 2023.
 
-Q: ¿Tienen partida registral?
-R: No existe partida registral a nombre de la desarrolladora. El predio figura a nombre de DIREFOR (entidad estatal). Esto NO representa riesgo legal ya que se posee legítimamente desde 1998, respaldado por escrituras públicas notariales.
+7. ¿Qué es exactamente lo que ofrecen?
+Prados del Paraíso ofrece transferencia de posesión de lotes, lo que permite a los adquirentes disfrutar y el uso efectivo del lote. Es importante que sepas que la condición legal del predio es la posesión, no la propiedad titulada. Nuestra empresa tiene una posesión del terreno desde 1998, respaldada por escrituras públicas y reconocida por la Municipalidad de Santa María a través de cartillas municipales PR y HR. Al adquirir un lote con nosotros, formalizamos esta transferencia mediante un Contrato de Transferencia de Posesión, lo que te otorga el derecho de uso y disfrute del lote. En resumen, no solo adquieres un lote, sino una oportunidad de inversión segura y con visión de futuro, con el respaldo de una comunidad de más de 800 clientes satisfechos.
 
-Q: ¿Es seguro comprar sin partida registral?
-R: Sí. La posesión legítima de más de 25 años, respaldada por escrituras públicas desde 1998, es un derecho real reconocido y protegido por la ley peruana. Además, el proyecto cuenta con el respaldo de Notaría Tambini y Casahierro Abogados.
+8. ¿Es lo mismo transferencia de posesión que comprar un terreno?
+No, no es exactamente lo mismo, aunque en la práctica ambos te permiten usar el terreno. Comprar la Propiedad (Título de Propiedad) significa que te conviertes en el dueño legal absoluto y tu nombre aparece inscrito en los Registros Públicos (SUNARP). La Transferencia de Posesión (lo que ofrecemos) significa que adquieres el uso, disfrute y control del lote con respaldo mediante Contrato de Transferencia de Posesión y Escritura Pública, pero no se inscribe inmediatamente como propiedad en SUNARP.
 
-Q: ¿Qué es la posesión legítima mediata?
-R: Es la posesión ejercida a través de otra persona (el comprador) manteniendo el vínculo jurídico. Es legítima porque tiene justo título y buena fe. En la escala de tipos de posesión (Legítima vs Ilegítima; Mediata vs Inmediata; Buena fe vs Mala fe), Prados de Paraíso tiene la categoría más sólida: Posesión Legítima Mediata de Buena Fe.
+9. ¿Qué diferencia hay entre posesión y propiedad?
+La Propiedad es el derecho real pleno que faculta a su titular a usar, disfrutar, disponer y reivindicar el bien, otorgándole la titularidad legal absoluta inscrita en SUNARP. La Posesión es el poder de hecho que ejerces sobre el bien (uso y control físico), un derecho real reconocido por el Código Civil (Art. 896). Mientras que la propiedad es el "título" inscrito, la posesión es el "uso y control físico" del terreno.
 
-Q: ¿Cuáles son los tipos de posesión?
-R: Posesión Legítima (con justo título) e Ilegítima (sin título). Dentro de la ilegítima: de Buena Fe (quien cree tener derecho) y de Mala Fe (sabe que no tiene derecho). También existe la posesión Precaria (sin título ni vínculo). Prados de Paraíso: Posesión Legítima Mediata de Buena Fe.
+10. ¿Puedo construir en el lote?
+Sí, puedes construir en el lote, sujeto a las normativas locales y el contrato de posesión.
 
-Q: ¿Puedo construir con posesión?
-R: Sí. El poseedor legítimo tiene todos los derechos de uso, disfrute y construcción sobre el terreno. Puede edificar, cercar, habitar y ejercer todos los actos propios del propietario.
+11. ¿La escritura me hace propietario?
+No, la escritura pública de transferencia de posesión no le hace propietario en el sentido registral. Formaliza la transferencia de la posesión y le otorga un respaldo sobre ella. Para ser propietario y que su nombre aparezca en Registros Públicos, se requiere un proceso adicional de saneamiento.
 
-Q: ¿Cuánto cuesta y cómo se paga?
-R: Los precios y condiciones de pago se consultan con el equipo de ventas. Existen opciones de financiamiento directo y facilidades de pago.
+12. ¿La empresa responde por el lote?
+La empresa responde por el lote en el sentido de que garantiza la transferencia de la posesión del predio. Desarrolladora Santa María del Norte S.A.C. formaliza esta transferencia mediante un Contrato de Transferencia de Posesión, el cual se eleva a Escritura Pública a solicitud del cliente, otorgando el derecho de uso y disfrute del lote asignado.
 
-6. PROCESO DE COMPRA:
-1. Separación del lote con pago inicial
-2. Verificación de documentos legales
-3. Firma de contrato de transferencia de posesión
-4. Pago en cuotas según plan acordado
-5. Gestión de saneamiento para título SUNARP (al completar pago)
-6. Inscripción definitiva en Registros Públicos
+13. ¿Qué planos entregarán a la firma del contrato?
+Se te proporcionará plano de ubicación, memoria descriptiva y planos perimétricos.
 
-7. RESPALDO LEGAL:
-- Notaría Tambini: Formalización de actos jurídicos
-- Casahierro Abogados: Asesoría legal especializada
-- Escrituras públicas desde 1998
-- Más de 25 años de posesión continua y pacífica
-"""
+14. ¿Cómo se respalda legalmente la posesión o qué documentos se entregan?
+La empresa cuenta con documentos que respaldan su posesión desde 1998: Escrituras Públicas y Cartillas municipales (PR y HR). Al cliente se le entrega: Contrato de transferencia de posesión (documento fundamental) y Pagos de tributos municipales (PR y HR) que demuestran el cumplimiento de obligaciones fiscales.
+
+15. ¿Cuál es el estado legal del proyecto y el proceso de adquisición?
+Estado Legal: Condición de posesión respaldada por Escrituras Públicas desde 1998 y reconocimiento municipal indirecto (PR y HR). Proceso: 1. Firma del Contrato de Transferencia de Posesión. 2. Trámite Notarial (Escritura Pública). 3. Entrega física del lote para uso y disfrute.
+
+16. ¿Qué documentos entrega la empresa al transferir la posesión?
+1. Contrato de Transferencia de Posesión (elevado a Escritura Pública a solicitud). 2. Escrituras Públicas que respaldan la posesión de la empresa desde 1998. 3. Cartillas Municipales (PR y HR).
+
+17. ¿Qué significa una transferencia de posesión?
+Significa que se te otorga el uso y disfrute del predio. Se formaliza a través de un Contrato de Transferencia de Posesión elevado a Escritura Pública ante notario.
+
+18. ¿Qué derechos tengo como poseedor?
+Tiene el derecho de disponer y disfrutar del bien como si fuera suyo, ejerciendo un poder de hecho. Puede usar el lote, construir, cultivarlo o darle el uso que desee, siempre dentro de los límites legales y contractuales.
+
+19. ¿Puedo perder mi lote?
+Nuestra empresa mantiene una posesión sólida respaldada desde 1998. Al suscribir su contrato, usted adquiere por tracto sucesivo el derecho posesorio de la empresa; legalmente no sería posible que pierda su lote actuando de buena fe y cumpliendo sus obligaciones.
+
+20. ¿DIREFOR, siendo el legítimo propietario, me puede quitar mi lote?
+Aunque figura a nombre de DIREFOR en Registros Públicos, nuestra posesión es anterior a la Ley 29618 (imprescriptibilidad de predios del Estado). Esto significa que nuestra posesión es legítima y no somos invasores. Garantizamos la entrega de la posesión para su uso y disfrute.
+
+21. Si pierdo un proceso de prescripción adquisitiva, ¿me pueden quitar mi lote?
+No automáticamente. Perder la prescripción solo significa que no se acreditó la propiedad en ese momento, pero no extingue su derecho posesorio ni habilita un desalojo. Usted mantiene la posesión y el uso del lote mientras cumpla su contrato y no haya una resolución judicial firme de despojo.
+
+22. ¿La empresa participa en el proceso de formalización o saneamiento?
+No directamente. El saneamiento es un proceso personal del cliente. La empresa garantiza la posesión y entrega todo el respaldo documental (Escrituras desde 1998 y Cartillas PR/HR) para que el cliente inicie su trámite de manera independiente con su abogado.
+
+23. ¿Existe riesgo de demanda de reivindicación o desalojo por parte de DIREFOR?
+La seguridad se sustenta en una posesión efectiva desde 1998, anterior a la inscripción estatal. Una demanda de este tipo no prospera automáticamente contra una posesión antigua, pública y de buena fe. El respaldo de DS Casa Hierro Abogados y la Notaría Tambini reducen significativamente estos riesgos.
+
+24. ¿La posesión me permite defenderme frente a terceros?
+Sí. El Código Civil reconoce la posesión como un derecho real. Además, el Art. 898 permite la "suma de plazos posesorios", sumando su tiempo al de la empresa desde 1998 para fortalecer su defensa legal.
+
+25. ¿Por qué la empresa no sanea primero el terreno?
+Es una decisión estratégica para ofrecer una alternativa comercialmente viable basada en la transferencia de posesión legítima. La empresa es transparente al informar que no vende propiedad saneada, permitiendo que el adquirente decida si desea realizar el saneamiento por su cuenta posteriormente.
+
+26. ¿Existe hoy algún juicio o problema legal activo sobre este terreno?
+No existe ningún juicio, denuncia o problema legal activo. El registro a nombre de DIREFOR es por un cambio normativo (Ley 29618), no por un litigio o invasión.
+
+27. ¿Qué respaldo real tengo si surge un problema legal mañana?
+Su respaldo es el Contrato de Transferencia de Posesión y la cadena de posesión documentada de la empresa desde 1998 (Escrituras Públicas y reconocimiento municipal), lo que le otorga el derecho de uso y disfrute.
+
+28. ¿Qué riesgos existen al adquirir por transferencia de posesión?
+El riesgo principal es que no se adquiere la propiedad inscrita de forma automática. La titulación dependerá de un proceso de saneamiento personal que debe gestionar y asumir el cliente en el futuro.
+
+29. ¿La empresa garantiza que no habrá problemas legales en el futuro?
+Garantiza contractualmente la entrega de la posesión en la condición legal informada. No puede garantizar escenarios futuros externos, pero entrega una posesión debidamente respaldada para enfrentar contingencias.
+
+30. ¿Qué obligaciones asume el adquirente?
+Pagar el precio pactado, cumplir las condiciones de entrega, asumir trámites notariales de la Escritura Pública y cumplir el reglamento interno del proyecto.
+""",
+    },
+    {
+        "titulo": "Prados de Paraíso - Base de Conocimientos Oficial (Preguntas 31 a 58)",
+        "marker": "Libro de Reclamaciones",  # detectar si ya es la versión oficial
+        "contenido": """BASE DE CONOCIMIENTOS OFICIAL - PRADOS DE PARAÍSO (CONTINUACIÓN)
+
+31. ¿Se paga algún impuesto por la transferencia?
+El adquirente puede asumir el impuesto predial una vez entregada la posesión. Estos tributos se gestionan sobre el predio matriz mientras no haya individualización por lote.
+
+32. ¿El contrato contempla cláusulas de saneamiento posesorio?
+No. Está estructurado para garantizar la entrega de la posesión, no para ejecutar el saneamiento de la propiedad.
+
+33. ¿La empresa ha evaluado iniciar el proceso de prescripción adquisitiva?
+Es una decisión estratégica. Actualmente la empresa no ofrece la prescripción como parte del proyecto; su actividad es la transferencia de posesión. La obtención del título es un proceso que el adquirente debe asumir de forma personal.
+
+34. ¿La transferencia de posesión podría considerarse simulación de compraventa?
+No. Son actos distintos. En Prados de Paraíso hay transparencia total: el contrato especifica que se transfiere posesión (uso y disfrute) y no propiedad. No hay engaño, por lo que no existe simulación.
+
+35. ¿Cómo se gestiona la formalización futura?
+Mediante saneamiento físico-legal (como prescripción adquisitiva judicial). Es un trámite personal del adquirente tras recibir el lote. La empresa facilita toda la documentación histórica para este fin.
+
+36. ¿Qué obligaciones mantiene la empresa luego de la transferencia?
+Entregar la posesión en la condición informada, proporcionar la documentación posesoria de sustento y cumplir cualquier otra obligación pendiente en el contrato.
+
+37. ¿La empresa mantiene la administración de áreas recreativas?
+Asume la gestión inicial. Posteriormente, la administración puede pasar a una asociación de propietarios según el reglamento interno.
+
+38. ¿Existen contingencias penales?
+No. El modelo se basa en la transferencia de posesión, figura reconocida legalmente y respaldada por escrituras públicas y transparencia notarial.
+
+39. ¿Qué respaldo real tiene el cliente si surge un conflicto?
+1. Posesión histórica desde 1998. 2. Asesoría de DS Casahierro Abogados y Notaría Tambini. 3. Entrega de toda la documentación probatoria para defensa o saneamiento.
+
+40. ¿Qué es DIREFOR y por qué figura como propietario?
+Es una entidad estatal. Aparece como titular debido a la Ley 29618 (2010), que registró a nombre del Estado terrenos sin dueño inscrito. Esto no invalida la posesión legítima de la empresa iniciada en 1998.
+
+41. ¿Es legal transferir la posesión de un terreno del Estado?
+Sí. La ley peruana protege la posesión como situación jurídica distinta a la propiedad. Se transfiere el derecho de posesión histórica (anterior a la inscripción estatal), lo cual es totalmente lícito.
+
+42. ¿Qué sucede si se revierte la posesión al Estado?
+No hay procesos activos para ello. La inscripción de DIREFOR no implica pérdida automática de la posesión documentada que se ejerce desde 1998.
+
+43. ¿La municipalidad reconoce oficialmente el proyecto?
+Sí, de manera indirecta mediante la emisión de cartillas PR y HR a nombre de la empresa, lo que permite el pago de tributos y valida la actividad en el predio.
+
+44. ¿Cómo impacta la ley que prohíbe la prescripción contra el Estado?
+La Ley 29618 impide nuevas prescripciones desde 2010, pero no invalida posesiones históricas preexistentes. Como nuestra posesión data de 1998, mantiene su legitimidad para ser transferida a los clientes.
+
+45. ¿La empresa acompaña judicialmente al cliente?
+La representación legal en procesos judiciales corresponde al cliente y su abogado. La empresa proporciona toda la documentación probatoria necesaria para respaldar la defensa.
+
+46. ¿La empresa indemnizará en caso de pérdida de posesión?
+La empresa no tiene una política de indemnización por causas externas. Su compromiso es entregar la posesión respaldada por documentos históricos para que el cliente la ejerza y defienda.
+
+47. ¿Se puede individualizar la posesión por cada lote?
+Sí. El contrato delimita y asigna el derecho de uso y disfrute exclusivo sobre un lote específico, otorgando control físico total al adquirente sobre ese espacio.
+
+48. ¿El adquirente podría ser demandado por el Estado?
+Podría ser parte involucrada, pero su defensa es sólida al contar con el respaldo de la posesión histórica desde 1998 y escrituras públicas que garantizan su inversión.
+
+49. ¿Qué pasa si el proyecto no logra consolidarse?
+Usted seguirá manteniendo la posesión, uso y disfrute de su lote específico basado en la antigüedad de la posesión transferida.
+
+50. ¿El contrato me protege frente a cualquier contingencia?
+Regula la transferencia y pagos, asegurando la entrega física y documental. No cubre litigios externos futuros con terceros o el Estado fuera del control de la empresa.
+
+51. ¿La empresa responde económicamente frente a la pérdida de posesión?
+No asume responsabilidad económica por hechos externos ajenos a su incumplimiento contractual. El respaldo es documental y legal sobre la posesión entregada.
+
+52. ¿Las cartillas PR y HR están a nombre de mi lote específico?
+Se emiten a nombre de la empresa por el predio matriz. Sirven como respaldo de posesión general del proyecto mientras no haya individualización administrativa.
+
+53. ¿Mi lote tendrá su propia cartilla municipal?
+Inicialmente no, pero la empresa se compromete a realizar el trámite de Individualización Administrativa ante la Municipalidad para que cada lote cuente con su propia documentación.
+
+54. ¿La empresa tiene Libro de Reclamaciones?
+Sí. Físico en Calle Libertadores 155, Of. 302, San Isidro. Virtual en: https://pradosdeparaiso.com.pe/
+
+55. ¿Qué pasa si no estoy conforme con la respuesta de la empresa?
+En caso de que no estés conforme con la respuesta inicial, siempre existe la posibilidad de continuar el diálogo a través de los canales internos. La empresa prioriza la atención y resolución directa de los reclamos. Solo si, luego de agotar estas vías internas, el reclamo no resulta satisfactorio, el consumidor mantiene su derecho de recurrir a los organismos de protección al consumidor conforme a la normativa vigente.
+
+56. ¿Cuáles son los plazos de atención de un reclamo?
+Conforme al Reglamento de Libro de Reclamaciones y su modificatoria, el plazo máximo para atender un reclamo es de 15 días hábiles improrrogables.
+
+57. ¿La empresa se responsabiliza por daños externos?
+La empresa no asume responsabilidad por daños ocasionados por factores externos fuera de su control, tales como desastres naturales, actos de terceros o decisiones de autoridades. La responsabilidad se limita a cumplir las obligaciones expresamente asumidas en el contrato.
+
+58. Si la empresa deja de pagar la deuda pendiente con el señor Manuel Ampuero, ¿Eso podría hacer que yo pierda mi lote o mi derecho de posesión?
+No. Desde la suscripción de la Escritura Pública por la que el señor Manuel Ampuero transfirió la posesión a favor de Desarrolladora Santa María del Norte, la empresa adquirió válidamente la posesión efectiva del terreno. Esta condición no se ve afectada por las obligaciones internas entre las partes originales. Aun en el supuesto de que la empresa incumpliera algún pago, ello no genera la pérdida ni afectación de la posesión ya transferida formalmente mediante escritura pública. Por lo tanto, no existe riesgo alguno para el cliente.
+""",
+    },
+]
 
 def _seed_knowledge_base():
-    """Actualiza el documento principal si tiene contenido placeholder o está desactualizado."""
-    TITULO = "Condiciones Legales de Prados de Paraíso"
+    """Sincroniza los documentos oficiales al startup. Actualiza o inserta según título."""
     try:
         import sqlite3 as _sqlite3
         with _sqlite3.connect(_db_path) as conn:
             cursor = conn.cursor()
-            cursor.execute("SELECT id, contenido FROM conocimiento_legal WHERE titulo = ?", (TITULO,))
-            row = cursor.fetchone()
-            needs_update = (
-                row is None or
-                "[ubicación]" in row[1] or
-                "DIREFOR" not in row[1]  # marcador de que es el doc real
-            )
-            if needs_update:
-                if row:
-                    cursor.execute("UPDATE conocimiento_legal SET contenido = ? WHERE id = ?",
-                                   (CONDICIONES_LEGALES_CONTENT, row[0]))
-                    logger.info(f"✅ Documento '{TITULO}' actualizado con contenido real")
+            for doc in _KB_SEED_DOCS:
+                cursor.execute("SELECT id, contenido FROM conocimiento_legal WHERE titulo = ?", (doc["titulo"],))
+                row = cursor.fetchone()
+                needs_update = row is None or doc["marker"] not in row[1]
+                if needs_update:
+                    if row:
+                        cursor.execute("UPDATE conocimiento_legal SET contenido = ? WHERE id = ?",
+                                       (doc["contenido"], row[0]))
+                        logger.info(f"✅ KB actualizado: '{doc['titulo'][:50]}...'")
+                    else:
+                        cursor.execute("INSERT INTO conocimiento_legal (titulo, contenido) VALUES (?, ?)",
+                                       (doc["titulo"], doc["contenido"]))
+                        logger.info(f"✅ KB insertado: '{doc['titulo'][:50]}...'")
                 else:
-                    cursor.execute("INSERT INTO conocimiento_legal (titulo, contenido) VALUES (?, ?)",
-                                   (TITULO, CONDICIONES_LEGALES_CONTENT))
-                    logger.info(f"✅ Documento '{TITULO}' insertado")
-                conn.commit()
-            else:
-                logger.info(f"✅ Documento '{TITULO}' ya tiene contenido correcto")
+                    logger.info(f"✅ KB OK: '{doc['titulo'][:50]}...'")
+            # Eliminar el doc viejo con título genérico si existe
+            cursor.execute("DELETE FROM conocimiento_legal WHERE titulo = 'Condiciones Legales de Prados de Paraíso'")
+            conn.commit()
     except Exception as e:
         logger.error(f"Error en _seed_knowledge_base: {e}")
 
@@ -1149,19 +1279,19 @@ async def _build_valeria_response(user_text: str, conversation_id: str) -> str:
     all_docs = sqlite_kb.get_all_documents_full()
     relevant_docs = sqlite_kb.search(query=user_text, top_k=5)
 
-    # Siempre incluir el doc principal completo (Condiciones Legales de Prados de Paraíso)
-    # Es el documento con la información más específica y crítica del proyecto
-    MAIN_DOC_TITULO = "Condiciones Legales de Prados de Paraíso"
+    # Siempre incluir ambos documentos oficiales completos (son la fuente primaria)
+    MAIN_DOC_PREFIX = "Prados de Paraíso - Base de Conocimientos Oficial"
     context_parts = []
 
-    # 1. Documento principal — siempre presente, sin truncar
-    main_doc = next((d for d in all_docs if MAIN_DOC_TITULO in d.get('titulo', '')), None)
-    if main_doc:
-        clean = re.sub(r'\*+', '', main_doc['contenido'])
-        context_parts.append(f"BASE DE CONOCIMIENTOS PRINCIPAL ({main_doc['titulo']}):\n{clean}")
+    # 1. Documentos oficiales — siempre presentes, sin truncar
+    main_docs = [d for d in all_docs if MAIN_DOC_PREFIX in d.get('titulo', '')]
+    seen_ids = set()
+    for doc in main_docs:
+        seen_ids.add(doc['id'])
+        clean = re.sub(r'\*+', '', doc['contenido'])
+        context_parts.append(f"BASE DE CONOCIMIENTOS OFICIAL ({doc['titulo']}):\n{clean}")
 
-    # 2. Docs relevantes adicionales — sin el principal (ya incluido), sin truncar
-    seen_ids = {main_doc['id']} if main_doc else set()
+    # 2. Docs relevantes adicionales — sin los oficiales (ya incluidos), sin truncar
     for doc in relevant_docs:
         if doc['id'] in seen_ids:
             continue
