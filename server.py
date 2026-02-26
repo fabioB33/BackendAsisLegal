@@ -67,7 +67,7 @@ OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 # Prioridad: Gemini > OpenAI > Emergent
 LLM_KEY = OPENAI_API_KEY or GEMINI_API_KEY or EMERGENT_LLM_KEY
 LLM_MODEL_PROVIDER = "openai" if OPENAI_API_KEY else "gemini"
-LLM_MODEL_NAME = "gpt-4o-mini" if OPENAI_API_KEY else "gemini/gemini-2.0-flash"
+LLM_MODEL_NAME = "gpt-4o-mini" if OPENAI_API_KEY else "gemini-2.0-flash"
 HEYGEN_API_KEY = os.environ.get('HEYGEN_API_KEY', '')
 ELEVENLABS_API_KEY = os.environ.get('ELEVENLABS_API_KEY', '')
 
