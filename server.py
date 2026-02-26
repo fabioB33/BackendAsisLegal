@@ -123,9 +123,97 @@ HEYGEN_AVATAR_ID = os.environ.get('HEYGEN_AVATAR_ID', '')
 
 from contextlib import asynccontextmanager
 
+CONDICIONES_LEGALES_CONTENT = """
+CONDICIONES LEGALES ESPECÍFICAS DE PRADOS DE PARAÍSO - PACHACAMAC, LIMA, PERÚ
+
+1. QUÉ ES PRADOS DE PARAÍSO:
+Prados de Paraíso es un proyecto inmobiliario de vivienda ecológica y sostenible ubicado en Pachacamac, Lima, Perú. Ofrece lotes para la construcción de viviendas, con un enfoque en la calidad y el desarrollo urbano. Está respaldado por Notaría Tambini y Casahierro Abogados.
+
+2. CONDICIÓN LEGAL DEL TERRENO:
+El proyecto tiene una condición legal mixta:
+- 50% del terreno: Propiedad adquirida mediante compraventa de acciones y derechos, con escrituras públicas desde 1998.
+- 50% restante: Terreno bajo condición de posesión legítima y mediata, ejercida de buena fe desde 1998.
+El predio figura registralmente a nombre de DIREFOR (entidad estatal), pero la empresa posee legítimamente desde hace más de 25 años.
+
+3. QUÉ RECIBE EL COMPRADOR:
+El comprador recibe un contrato de transferencia de posesión (NO un título de propiedad en primera instancia). Para obtener el título de propiedad inscrito en Registros Públicos (SUNARP), el propietario debe gestionar el saneamiento legal una vez completado el pago total.
+
+4. DIFERENCIA ENTRE PROPIEDAD Y POSESIÓN:
+- Propiedad: Derecho que otorga titularidad legal inscribible en Registros Públicos (SUNARP). Requiere partida registral.
+- Posesión legítima: Ejercicio de hecho de poderes inherentes a la propiedad. Reconocida y protegida por el Código Civil peruano.
+La posesión de Prados de Paraíso es LEGÍTIMA, MEDIATA y de BUENA FE — la más sólida categoría posesoria.
+
+5. PREGUNTAS FRECUENTES REALES:
+
+Q: ¿Cuándo entregan el título de propiedad?
+R: La condición legal actual es la POSESIÓN. Al comprar, se entrega contrato de transferencia de posesión. Para obtener el título de propiedad inscrito en SUNARP, el propietario debe gestionar el saneamiento legal tras completar el pago total. El equipo legal de Prados de Paraíso acompaña este proceso.
+
+Q: ¿Tienen partida registral?
+R: No existe partida registral a nombre de la desarrolladora. El predio figura a nombre de DIREFOR (entidad estatal). Esto NO representa riesgo legal ya que se posee legítimamente desde 1998, respaldado por escrituras públicas notariales.
+
+Q: ¿Es seguro comprar sin partida registral?
+R: Sí. La posesión legítima de más de 25 años, respaldada por escrituras públicas desde 1998, es un derecho real reconocido y protegido por la ley peruana. Además, el proyecto cuenta con el respaldo de Notaría Tambini y Casahierro Abogados.
+
+Q: ¿Qué es la posesión legítima mediata?
+R: Es la posesión ejercida a través de otra persona (el comprador) manteniendo el vínculo jurídico. Es legítima porque tiene justo título y buena fe. En la escala de tipos de posesión (Legítima vs Ilegítima; Mediata vs Inmediata; Buena fe vs Mala fe), Prados de Paraíso tiene la categoría más sólida: Posesión Legítima Mediata de Buena Fe.
+
+Q: ¿Cuáles son los tipos de posesión?
+R: Posesión Legítima (con justo título) e Ilegítima (sin título). Dentro de la ilegítima: de Buena Fe (quien cree tener derecho) y de Mala Fe (sabe que no tiene derecho). También existe la posesión Precaria (sin título ni vínculo). Prados de Paraíso: Posesión Legítima Mediata de Buena Fe.
+
+Q: ¿Puedo construir con posesión?
+R: Sí. El poseedor legítimo tiene todos los derechos de uso, disfrute y construcción sobre el terreno. Puede edificar, cercar, habitar y ejercer todos los actos propios del propietario.
+
+Q: ¿Cuánto cuesta y cómo se paga?
+R: Los precios y condiciones de pago se consultan con el equipo de ventas. Existen opciones de financiamiento directo y facilidades de pago.
+
+6. PROCESO DE COMPRA:
+1. Separación del lote con pago inicial
+2. Verificación de documentos legales
+3. Firma de contrato de transferencia de posesión
+4. Pago en cuotas según plan acordado
+5. Gestión de saneamiento para título SUNARP (al completar pago)
+6. Inscripción definitiva en Registros Públicos
+
+7. RESPALDO LEGAL:
+- Notaría Tambini: Formalización de actos jurídicos
+- Casahierro Abogados: Asesoría legal especializada
+- Escrituras públicas desde 1998
+- Más de 25 años de posesión continua y pacífica
+"""
+
+def _seed_knowledge_base():
+    """Actualiza el documento principal si tiene contenido placeholder o está desactualizado."""
+    TITULO = "Condiciones Legales de Prados de Paraíso"
+    try:
+        import sqlite3 as _sqlite3
+        with _sqlite3.connect(_db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT id, contenido FROM conocimiento_legal WHERE titulo = ?", (TITULO,))
+            row = cursor.fetchone()
+            needs_update = (
+                row is None or
+                "[ubicación]" in row[1] or
+                "DIREFOR" not in row[1]  # marcador de que es el doc real
+            )
+            if needs_update:
+                if row:
+                    cursor.execute("UPDATE conocimiento_legal SET contenido = ? WHERE id = ?",
+                                   (CONDICIONES_LEGALES_CONTENT, row[0]))
+                    logger.info(f"✅ Documento '{TITULO}' actualizado con contenido real")
+                else:
+                    cursor.execute("INSERT INTO conocimiento_legal (titulo, contenido) VALUES (?, ?)",
+                                   (TITULO, CONDICIONES_LEGALES_CONTENT))
+                    logger.info(f"✅ Documento '{TITULO}' insertado")
+                conn.commit()
+            else:
+                logger.info(f"✅ Documento '{TITULO}' ya tiene contenido correcto")
+    except Exception as e:
+        logger.error(f"Error en _seed_knowledge_base: {e}")
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
+    # Startup — asegurar que el documento principal tenga el contenido correcto
+    _seed_knowledge_base()
     logger.info("✅ Application started successfully")
     yield
     # Shutdown — properly close MongoDB async connection

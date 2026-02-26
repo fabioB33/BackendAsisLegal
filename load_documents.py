@@ -188,59 +188,61 @@ R: Proceso:
         {
             "titulo": "Condiciones Legales de Prados de Paraíso",
             "contenido": """
-CONDICIONES LEGALES ESPECÍFICAS DE PRADOS DE PARAÍSO:
+CONDICIONES LEGALES ESPECÍFICAS DE PRADOS DE PARAÍSO - PACHACAMAC, LIMA, PERÚ
 
-1. NATURALEZA DEL PROYECTO:
-Prados de Paraíso es un proyecto de vivienda ecológica y sostenible ubicado en [ubicación], 
-que ofrece terrenos con todas las facilidades legales para construcción de vivienda.
+1. QUÉ ES PRADOS DE PARAÍSO:
+Prados de Paraíso es un proyecto inmobiliario de vivienda ecológica y sostenible ubicado en Pachacamac, Lima, Perú. Ofrece lotes para la construcción de viviendas, con un enfoque en la calidad y el desarrollo urbano. Está respaldado por Notaría Tambini y Casahierro Abogados.
 
-2. CARACTERÍSTICAS LEGALES:
-- Todos los terrenos cuentan con título de propiedad
-- Inscripción en Registros Públicos (SUNARP)
-- Certificado de zonificación residencial
-- Servicios básicos proyectados
-- Vías de acceso establecidas
+2. CONDICIÓN LEGAL DEL TERRENO:
+El proyecto tiene una condición legal mixta:
+- 50% del terreno: Propiedad adquirida mediante compraventa de acciones y derechos, con escrituras públicas desde 1998.
+- 50% restante: Terreno bajo condición de posesión legítima y mediata, ejercida de buena fe desde 1998.
+El predio figura registralmente a nombre de DIREFOR (entidad estatal), pero la empresa posee legítimamente desde hace más de 25 años.
 
-3. DERECHOS DE LOS PROPIETARIOS:
-- Propiedad privada con título inscrito
-- Derecho a construir vivienda ecológica
-- Acceso a servicios comunitarios
-- Participación en decisiones de la comunidad
-- Uso de áreas comunes
+3. QUÉ RECIBE EL COMPRADOR:
+El comprador recibe un contrato de transferencia de posesión (NO un título de propiedad en primera instancia). Para obtener el título de propiedad inscrito en Registros Públicos (SUNARP), el propietario debe gestionar el saneamiento legal una vez completado el pago total.
 
-4. OBLIGACIONES:
-- Pago de cuotas de mantenimiento
-- Respeto de normas de convivencia
-- Construcción según parámetros ecológicos
-- Pago de impuestos y arbitrios
-- Cuidado del medio ambiente
+4. DIFERENCIA ENTRE PROPIEDAD Y POSESIÓN:
+- Propiedad: Derecho que otorga titularidad legal inscribible en Registros Públicos (SUNARP). Requiere partida registral.
+- Posesión legítima: Ejercicio de hecho de poderes inherentes a la propiedad. Reconocida y protegida por el Código Civil peruano.
+La posesión de Prados de Paraíso es LEGÍTIMA, MEDIATA y de BUENA FE — la más sólida categoría posesoria.
 
-5. PROCESO DE COMPRA:
-1. Separación del lote
-2. Verificación de documentos
-3. Firma de minuta de compraventa
-4. Elevación a escritura pública
-5. Inscripción en SUNARP
-6. Entrega de título de propiedad
+5. PREGUNTAS FRECUENTES REALES:
 
-6. FINANCIAMIENTO:
-- Opciones de financiamiento directo
-- Posibilidad de crédito bancario
-- Facilidades de pago
-- Sin intereses (consultar condiciones)
+Q: ¿Cuándo entregan el título de propiedad?
+R: La condición legal actual es la POSESIÓN. Al comprar, se entrega contrato de transferencia de posesión. Para obtener el título de propiedad inscrito en SUNARP, el propietario debe gestionar el saneamiento legal tras completar el pago total. El equipo legal de Prados de Paraíso acompaña este proceso.
 
-7. GARANTÍAS:
-- Título de propiedad inscrito
-- Ausencia de gravámenes
-- Linderos definidos
-- Documentación completa
-- Asesoría legal incluida
+Q: ¿Tienen partida registral?
+R: No existe partida registral a nombre de la desarrolladora. El predio figura a nombre de DIREFOR (entidad estatal). Esto NO representa riesgo legal ya que se posee legítimamente desde 1998, respaldado por escrituras públicas notariales.
 
-8. CONTACTO Y CONSULTAS:
-Para más información sobre aspectos legales, contactar con:
-- Departamento Legal
-- Asesoría gratuita incluida en la compra
-- Acompañamiento en todo el proceso
+Q: ¿Es seguro comprar sin partida registral?
+R: Sí. La posesión legítima de más de 25 años, respaldada por escrituras públicas desde 1998, es un derecho real reconocido y protegido por la ley peruana. Además, el proyecto cuenta con el respaldo de Notaría Tambini y Casahierro Abogados.
+
+Q: ¿Qué es la posesión legítima mediata?
+R: Es la posesión ejercida a través de otra persona (el comprador) manteniendo el vínculo jurídico. Es legítima porque tiene justo título y buena fe. En la escala de tipos de posesión (Legítima vs Ilegítima; Mediata vs Inmediata; Buena fe vs Mala fe), Prados de Paraíso tiene la categoría más sólida: Posesión Legítima Mediata de Buena Fe.
+
+Q: ¿Cuáles son los tipos de posesión?
+R: Posesión Legítima (con justo título) e Ilegítima (sin título). Dentro de la ilegítima: de Buena Fe (quien cree tener derecho) y de Mala Fe (sabe que no tiene derecho). También existe la posesión Precaria (sin título ni vínculo). Prados de Paraíso: Posesión Legítima Mediata de Buena Fe.
+
+Q: ¿Puedo construir con posesión?
+R: Sí. El poseedor legítimo tiene todos los derechos de uso, disfrute y construcción sobre el terreno. Puede edificar, cercar, habitar y ejercer todos los actos propios del propietario.
+
+Q: ¿Cuánto cuesta y cómo se paga?
+R: Los precios y condiciones de pago se consultan con el equipo de ventas. Existen opciones de financiamiento directo y facilidades de pago.
+
+6. PROCESO DE COMPRA:
+1. Separación del lote con pago inicial
+2. Verificación de documentos legales
+3. Firma de contrato de transferencia de posesión
+4. Pago en cuotas según plan acordado
+5. Gestión de saneamiento para título SUNARP (al completar pago)
+6. Inscripción definitiva en Registros Públicos
+
+7. RESPALDO LEGAL:
+- Notaría Tambini: Formalización de actos jurídicos
+- Casahierro Abogados: Asesoría legal especializada
+- Escrituras públicas desde 1998
+- Más de 25 años de posesión continua y pacífica
             """
         }
     ]
