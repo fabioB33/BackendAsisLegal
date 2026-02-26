@@ -1451,8 +1451,10 @@ async def liveavatar_speak(request: SpeakRequest):
             logger.info(f"🎤 Received audio: {len(audio_bytes)} bytes for session {request.session_id[:8]}")
 
             # Step 1: STT
+            # Pass filename so ElevenLabs can detect the format (webm/opus → ogg is compatible)
+            audio_file = ("audio.webm", io.BytesIO(audio_bytes), "audio/webm")
             transcription = elevenlabs_client.speech_to_text.convert(
-                file=io.BytesIO(audio_bytes),
+                file=audio_file,
                 model_id="scribe_v1",
             )
             raw_text = transcription.text if hasattr(transcription, "text") else str(transcription)
