@@ -1272,32 +1272,63 @@ def _truncate_to_sentences(text: str, max_sentences: int = 5) -> str:
     return trimmed
 
 
+def _extract_relevant_chunks(doc_content: str, query: str, max_chars: int = 3000) -> str:
+    """Extrae los párrafos/preguntas más relevantes de un documento según la query."""
+    import re
+    # Dividir por bloques (preguntas numeradas o párrafos dobles)
+    blocks = re.split(r'\n(?=\d+[\.\)]|\n)', doc_content)
+    query_words = set(w.lower() for w in query.split() if len(w) >= 3)
+
+    scored = []
+    for block in blocks:
+        if not block.strip():
+            continue
+        block_lower = block.lower()
+        score = sum(1 for w in query_words if w in block_lower)
+        scored.append((score, block.strip()))
+
+    # Ordenar por relevancia, luego tomar los mejores hasta max_chars
+    scored.sort(key=lambda x: x[0], reverse=True)
+    result_parts = []
+    total = 0
+    for score, block in scored:
+        if total + len(block) > max_chars:
+            break
+        result_parts.append(block)
+        total += len(block)
+
+    # Si no hay nada relevante, tomar los primeros 3000 chars del doc
+    if not result_parts:
+        return doc_content[:max_chars]
+
+    return "\n\n".join(result_parts)
+
+
 async def _build_valeria_response(user_text: str, conversation_id: str) -> str:
     """STT ya hecho. Búsqueda semántica + LLM → texto de respuesta."""
     import re
 
     all_docs = sqlite_kb.get_all_documents_full()
-    relevant_docs = sqlite_kb.search(query=user_text, top_k=5)
+    relevant_docs = sqlite_kb.search(query=user_text, top_k=3)
 
-    # Siempre incluir ambos documentos oficiales completos (son la fuente primaria)
     MAIN_DOC_PREFIX = "Prados de Paraíso - Base de Conocimientos Oficial"
     context_parts = []
-
-    # 1. Documentos oficiales — siempre presentes, sin truncar
-    main_docs = [d for d in all_docs if MAIN_DOC_PREFIX in d.get('titulo', '')]
     seen_ids = set()
+
+    # 1. Documentos oficiales — extraer solo los chunks relevantes (máx 3000 chars c/u)
+    main_docs = [d for d in all_docs if MAIN_DOC_PREFIX in d.get('titulo', '')]
     for doc in main_docs:
         seen_ids.add(doc['id'])
-        clean = re.sub(r'\*+', '', doc['contenido'])
+        chunk = _extract_relevant_chunks(doc['contenido'], user_text, max_chars=3000)
+        clean = re.sub(r'\*+', '', chunk)
         context_parts.append(f"BASE DE CONOCIMIENTOS OFICIAL ({doc['titulo']}):\n{clean}")
 
-    # 2. Docs relevantes adicionales — sin los oficiales (ya incluidos), sin truncar
+    # 2. Docs relevantes adicionales (no oficiales), truncados a 1500 chars
     for doc in relevant_docs:
         if doc['id'] in seen_ids:
             continue
         seen_ids.add(doc['id'])
-        clean = re.sub(r'^\s*[-\d]+[.)]\s+', '', doc['contenido'], flags=re.MULTILINE)
-        clean = re.sub(r'\*+', '', clean)
+        clean = re.sub(r'\*+', '', doc['contenido'])[:1500]
         context_parts.append(f"Información adicional ({doc['titulo']}):\n{clean}")
 
     context = "\n\n".join(context_parts) if context_parts else "Usa tu conocimiento general sobre el proyecto."
