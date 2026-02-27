@@ -1182,7 +1182,11 @@ async def websocket_chat(websocket: WebSocket, conversation_id: str):
     try:
         while True:
             data = await websocket.receive_text()
-            message_data = json.loads(data)
+            try:
+                message_data = json.loads(data)
+            except json.JSONDecodeError:
+                await websocket.send_json({"error": "Mensaje inválido"})
+                continue
             
             # Create user message
             user_msg = Message(
@@ -1369,6 +1373,8 @@ async def _build_valeria_response(user_text: str, conversation_id: str) -> str:
                 {"role": "user", "content": user_text},
             ],
         )
+        if not response.choices or not response.choices[0].message.content:
+            raise Exception("LLM returned empty response")
         raw = response.choices[0].message.content.strip()
     except Exception as e:
         err_str = str(e).lower()

@@ -142,7 +142,7 @@ class LiveAvatarService:
         try:
             async for raw in ws:
                 try:
-                    evt = json.loads(raw)
+                    evt = json.loads(raw) if isinstance(raw, (str, bytes)) else {}
                     etype = evt.get("type", "")
                     if etype == "agent.speak_started":
                         logger.info(f"🔊 Avatar speak started [{session_id[:8]}]")
