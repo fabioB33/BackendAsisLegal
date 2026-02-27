@@ -1521,9 +1521,19 @@ async def liveavatar_speak(request: SpeakRequest):
             if not user_text:
                 raise HTTPException(status_code=400, detail="No se pudo transcribir el audio")
 
-            # Step 2: LLM
+            # Descartar transcripciones que son solo ruido ambiental
+            # ElevenLabs devuelve texto entre paréntesis para efectos de sonido (no voz humana)
+            import re as _re
+            text_without_parens = _re.sub(r'\([^)]*\)', '', user_text).strip()
+            if not text_without_parens or len(text_without_parens) < 3:
+                raise HTTPException(
+                    status_code=400,
+                    detail="No se detectó voz. Hablá más cerca del micrófono y con voz clara."
+                )
+
+            # Step 2: LLM — usar texto sin paréntesis de ruido
             conv_id     = request.conversation_id or str(uuid.uuid4())
-            ai_response = await _build_valeria_response(user_text, conv_id)
+            ai_response = await _build_valeria_response(text_without_parens, conv_id)
             logger.info(f"🤖 Response: {ai_response[:80]}...")
 
             # Step 3: TTS — generate MP3 (browser) and optionally PCM (lip-sync) concurrently
