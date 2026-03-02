@@ -100,6 +100,9 @@ liveavatar_service = LiveAvatarAPIService()
 _session_locks: dict = {}
 _session_lock_times: dict = {}  # tracks last-used timestamp for cleanup
 
+# Cache for knowledge base documents (static content — loaded once at startup)
+_kb_docs_cache: list | None = None
+
 def _get_session_lock(session_id: str) -> asyncio.Lock:
     import time as _time
     if session_id not in _session_locks:
@@ -1265,19 +1268,19 @@ class TextSpeakRequest(BaseModel):
     text: str
     conversation_id: Optional[str] = None
 
-VALERIA_SYSTEM = '''Eres Valeria, asistente legal de Prados de Paraíso, proyecto inmobiliario en Pachacamac, Lima, Perú.
+VALERIA_SYSTEM = '''Eres Valeria, asesora legal de Prados de Paraíso, proyecto inmobiliario en Pachacamac, Lima, Perú.
 
-Tu función es responder las dudas legales de clientes potenciales que están considerando comprar un lote. Tu objetivo es generar confianza y resolver inquietudes sobre la condición legal del proyecto de manera clara y tranquilizadora, siempre con fundamento real.
+Tu función principal es asesorar legalmente a clientes potenciales que están considerando comprar un lote. Resolvés sus dudas sobre la condición legal del proyecto de manera clara, tranquilizadora y con fundamento real. Generás confianza explicando con detalle y sin apuro.
 
-REGLA ABSOLUTA DE CONOCIMIENTO: Basá SIEMPRE tus respuestas en la BASE DE CONOCIMIENTOS PRINCIPAL que se te proporciona. Esa es la fuente oficial y única del proyecto. NO uses conocimiento genérico sobre derecho inmobiliario si contradice o va más allá de lo que dice la base de conocimientos.
+REGLA ABSOLUTA DE CONOCIMIENTO: La fuente de información de mayor prioridad es la BASE DE CONOCIMIENTOS OFICIAL (seed docs) que se te proporciona. Usá esa información SIEMPRE por encima de cualquier conocimiento general. Solo si la base de conocimientos no cubre el tema, podés complementar con conocimiento general de derecho inmobiliario peruano, pero sin contradecir lo que dice la base oficial.
 
-REGLA ABSOLUTA DE FORMATO: Responde SIEMPRE en exactamente 3 a 5 oraciones cortas. Ni una más. Tus respuestas se convierten a audio, así que deben ser breves y fluidas.
+REGLA ABSOLUTA DE FORMATO: Respondé SIEMPRE entre 4 y 5 oraciones. Podés explayarte con tranquilidad dentro de ese rango — no hace falta ser escueto, el cliente necesita entender bien. Tus respuestas se convierten a audio, así que usá oraciones completas y fluidas.
 
 FORMATO OBLIGATORIO:
 - Texto plano continuo, sin listas, sin guiones, sin asteriscos, sin numeraciones, sin títulos.
 - Solo oraciones completas separadas por punto.
 - Tono cálido, profesional y tranquilizador, como una llamada telefónica de confianza.
-- Español peruano natural. Evitá tecnicismos innecesarios; si usás términos legales, explicalos en la misma oración.
+- Español peruano natural. Si usás términos legales, explicalos en la misma oración para que el cliente entienda sin necesidad de buscarlos.
 
 DATOS CLAVE DEL PROYECTO (siempre válidos):
 - El comprador recibe un contrato de transferencia de posesión (no título directo). El título SUNARP se gestiona al completar el pago.
@@ -1285,11 +1288,11 @@ DATOS CLAVE DEL PROYECTO (siempre válidos):
 - La posesión es legítima, mediata y de buena fe desde 1998, respaldada por escrituras públicas y Notaría Tambini.
 - Si el cliente pregunta sobre precios o condiciones de pago, indicá que debe consultar con el equipo de ventas.
 
-Si no encontrás información específica en la base de conocimientos, respondé con lo que sabés del proyecto en máximo 3 oraciones y ofrecé derivar al equipo legal o de ventas.
+Si no encontrás información específica en la base de conocimientos, respondé con lo que sabés del proyecto en 4 oraciones y ofrecé derivar al equipo legal o de ventas.
 '''
 
-def _truncate_to_sentences(text: str, max_sentences: int = 5) -> str:
-    """Corta el texto a un máximo de N oraciones completas."""
+def _truncate_to_sentences(text: str, max_sentences: int = 5, min_sentences: int = 4) -> str:
+    """Corta el texto a un máximo de N oraciones completas (mínimo min_sentences si hay suficientes)."""
     import re
     # Dividir por punto seguido de espacio o fin de línea
     sentences = re.split(r'(?<=[.!?])\s+', text.strip())
@@ -1337,8 +1340,12 @@ def _extract_relevant_chunks(doc_content: str, query: str, max_chars: int = 3000
 async def _build_valeria_response(user_text: str, conversation_id: str) -> str:
     """STT ya hecho. Búsqueda semántica + LLM → texto de respuesta."""
     import re
+    global _kb_docs_cache
 
-    all_docs = sqlite_kb.get_all_documents_full()
+    # Cache all_docs — content never changes at runtime, no need to re-fetch every call
+    if _kb_docs_cache is None:
+        _kb_docs_cache = sqlite_kb.get_all_documents_full()
+    all_docs = _kb_docs_cache
     relevant_docs = sqlite_kb.search(query=user_text, top_k=3)
 
     MAIN_DOC_PREFIX = "Prados de Paraíso - Base de Conocimientos Oficial"
@@ -1399,7 +1406,7 @@ async def _tts_mp3(text: str) -> bytes:
         stream = elevenlabs_client.text_to_speech.stream(
             text=text,
             voice_id=ELEVENLABS_VOICE_ID,
-            model_id="eleven_multilingual_v2",
+            model_id="eleven_turbo_v2_5",  # ~50% más rápido que eleven_multilingual_v2
             output_format="mp3_44100_128",
             voice_settings=VoiceSettings(
                 stability=0.55,
@@ -1425,7 +1432,7 @@ async def _tts_pcm(text: str) -> bytes:
         stream = elevenlabs_client.text_to_speech.stream(
             text=text,
             voice_id=ELEVENLABS_VOICE_ID,
-            model_id="eleven_multilingual_v2",
+            model_id="eleven_turbo_v2_5",  # ~50% más rápido que eleven_multilingual_v2
             output_format="pcm_24000",   # PCM 16-bit 24kHz — requerido por LiveAvatar LITE
             voice_settings=VoiceSettings(
                 stability=0.55,
@@ -1513,13 +1520,15 @@ async def liveavatar_speak(request: SpeakRequest):
 
             logger.info(f"🎤 Received audio: {len(audio_bytes)} bytes for session {request.session_id[:8]}")
 
-            # Step 1: STT
+            # Step 1: STT — run in thread pool to avoid blocking the async event loop
             # Pass filename so ElevenLabs can detect the format (webm/opus → ogg is compatible)
-            audio_file = ("audio.webm", io.BytesIO(audio_bytes), "audio/webm")
-            transcription = elevenlabs_client.speech_to_text.convert(
-                file=audio_file,
-                model_id="scribe_v1",
-            )
+            def _do_stt():
+                audio_file = ("audio.webm", io.BytesIO(audio_bytes), "audio/webm")
+                return elevenlabs_client.speech_to_text.convert(
+                    file=audio_file,
+                    model_id="scribe_v1",
+                )
+            transcription = await asyncio.to_thread(_do_stt)
             raw_text = transcription.text if hasattr(transcription, "text") else str(transcription)
             user_text = raw_text.strip()[:2000]  # cap transcription length to avoid LLM token overflow
             logger.info(f"📝 Transcribed: {user_text}")
