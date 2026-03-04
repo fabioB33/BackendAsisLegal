@@ -360,6 +360,13 @@ De acuerdo con el Reglamento del Libro de Reclamaciones y su modificatoria, el p
 57. ¿La empresa se responsabiliza por daños externos?
 En realidad, la empresa no asume responsabilidad por daños ocasionados por factores externos que estén fuera de su control. Esto incluye situaciones como desastres naturales, actos de terceros, decisiones de autoridades o cualquier otro evento fortuito o de fuerza mayor.
 Nuestra responsabilidad se limita estrictamente a cumplir con las obligaciones que hemos asumido en el contrato, que son principalmente la entrega de la posesión del lote y la documentación correspondiente.
+
+58. Si la empresa Desarrolladora Santa Maria del Norte S.A.C deja de pagar la deuda pendiente con el señor Manuel Ampuero por la transferencia de posesión, ¿Eso podría hacer que yo pierda mi lote o mi derecho de posesión?
+Desde la suscripción de la Escritura Pública por la que el señor Manuel Ampuero transfirió la posesión a favor de Desarrolladora Santa María del Norte (en adelante, la "empresa"), adquirió válidamente la posesión efectiva del terreno.
+En consecuencia, desde esa fecha la empresa ostenta la calidad de poseedora, con plena facultad para transferir dicha posesión a terceros. Esta condición posesoria no se ve afectada por las obligaciones internas o relaciones económicas que puedan existir entre las partes que intervinieron en la transferencia original.
+Así, aun en el supuesto de que la empresa incumpliera algún pago u obligación económica pendiente frente al señor Ampuero, ello no genera la pérdida, restitución ni afectación de la posesión ya transferida. La posesión se mantiene firme, pues fue otorgada formalmente mediante escritura pública y recae sobre la empresa como persona jurídica.
+Por tanto, cualquier relación económica entre las partes originales es independiente y no incide en la situación posesoria del predio, ni en la validez de la posesión que posteriormente se transfiera a los futuros posesionarios.
+En consecuencia, se reafirma que no existe riesgo alguno para el cliente respecto a la estabilidad, continuidad o validez de la posesión que adquirirá.
 """,
     },
 ]
