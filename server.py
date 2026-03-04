@@ -130,7 +130,7 @@ from contextlib import asynccontextmanager
 _KB_SEED_DOCS = [
     {
         "titulo": "Prados de Paraíso - Base de Conocimientos Oficial (Versión Integrada)",
-        "marker": "Resolución N.º 00202-2026",  # detectar si ya es la versión actualizada
+        "marker": "posesionarios",  # texto único de la pregunta 58 — fuerza update si no está
         "contenido": """BASE DE CONOCIMIENTOS DEL BOT (VERSIÓN INTEGRADA Y FINAL)
 
 1. ¿Qué es Prados del Paraíso?
@@ -1420,7 +1420,7 @@ async def _build_valeria_response(user_text: str, conversation_id: str) -> str:
     main_docs = [d for d in all_docs if MAIN_DOC_PREFIX in d.get('titulo', '')]
     for doc in main_docs:
         seen_ids.add(doc['id'])
-        chunk = _extract_relevant_chunks(doc['contenido'], user_text, max_chars=3000)
+        chunk = _extract_relevant_chunks(doc['contenido'], user_text, max_chars=5000)
         clean = re.sub(r'\*+', '', chunk)
         context_parts.append(f"BASE DE CONOCIMIENTOS OFICIAL ({doc['titulo']}):\n{clean}")
 
@@ -1438,7 +1438,7 @@ async def _build_valeria_response(user_text: str, conversation_id: str) -> str:
         response = await litellm.acompletion(
             model=f"{LLM_MODEL_PROVIDER}/{LLM_MODEL_NAME}",
             api_key=LLM_KEY,
-            max_tokens=220,
+            max_tokens=300,
             messages=[
                 {"role": "system", "content": VALERIA_SYSTEM + f"\nINFORMACIÓN DISPONIBLE:\n{context}"},
                 {"role": "user", "content": user_text},
