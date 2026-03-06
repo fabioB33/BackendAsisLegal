@@ -208,7 +208,19 @@ Sí, la empresa es formal y cuenta con el respaldo de la marca Prados de Paraís
 El proyecto "Villa Eco-Sostenible" inicia en octubre del 2023.
 
 7. ¿Qué es exactamente lo que ofrecen?
-Prados del Paraíso ofrece transferencia de posesión de lotes, lo que permite a los adquirentes disfrutar y el uso efectivo del lote. Es importante que sepas que la condición legal del predio es la posesión, no la propiedad titulada. Nuestra empresa tiene una posesión del terreno desde 1998, respaldada por escrituras públicas y reconocida por la Municipalidad de Santa María a través de cartillas municipales PR y HR. Al adquirir un lote con nosotros, formalizamos esta transferencia mediante un Contrato de Transferencia de Posesión, lo que te otorga el derecho de uso y disfrute del lote. En resumen, no solo adquieres un lote, sino una oportunidad de inversión segura y con visión de futuro, con el respaldo de una comunidad de más de 800 clientes satisfechos.
+En Prados de Paraíso ofrecemos la transferencia de posesión de lotes. Esto significa que, al adquirir un lote con nosotros, obtienes el derecho de uso, disfrute y control efectivo del terreno.
+
+Es importante que tengas claro que la condición legal actual del predio es de posesión, no de propiedad titulada inscrita en Registros Públicos a nombre de la empresa. Sin embargo, nuestra posesión es sólida y segura porque:
+
+La empresa ejerce la posesión del terreno desde mil novecientos noventa y ocho, respaldada por escrituras públicas.
+
+Contamos con el reconocimiento de la Municipalidad de Santa María a través de las cartillas municipales (Predio Rústico y Hoja Resumen).
+
+Formalizamos tu adquisición mediante un Contrato de Transferencia de Posesión elevado a Escritura Pública ante notario.
+
+Adicionalmente, contamos con la Resolución N.º 00202-2026-SOPCFPUR/MDSM, que aprueba el cambio de zonificación, reconociendo el área del proyecto como Zona Residencial de Densidad Media (RDM – R3). Este importante avance permite la ejecución de áreas recreativas, parques y espacios diversos, que forman parte del concepto integral de la comunidad sostenible de Villa Eco-Sostenible.
+
+En resumen, te ofrecemos una oportunidad de inversión sólida, con respaldo legal, reconocimiento municipal y proyección urbana, dentro de una comunidad que ya cuenta con más de ochocientos clientes satisfechos y que continúa consolidándose como un proyecto sostenible y con visión de crecimiento.
 
 8. ¿Es lo mismo transferencia de posesión que comprar un terreno?
 No, no es exactamente lo mismo, aunque en la práctica ambos te permiten usar el terreno. Comprar la Propiedad (Título de Propiedad) significa que te conviertes en el dueño legal absoluto y tu nombre aparece inscrito en los Registros Públicos (SUNARP). La Transferencia de Posesión (lo que ofrecemos) significa que adquieres el uso, disfrute y control del lote con respaldo mediante Contrato de Transferencia de Posesión y Escritura Pública, pero no se inscribe inmediatamente como propiedad en SUNARP.
@@ -231,8 +243,18 @@ Se te proporcionará plano de ubicación, memoria descriptiva y planos perimétr
 14. ¿Cómo se respalda legalmente la posesión o qué documentos se entregan?
 La empresa cuenta con documentos que respaldan su posesión desde 1998: Escrituras Públicas y Cartillas municipales (PR y HR). Al cliente se le entrega: Contrato de transferencia de posesión (documento fundamental) y Pagos de tributos municipales (PR y HR) que demuestran el cumplimiento de obligaciones fiscales.
 
-15. ¿Cuál es el estado legal del proyecto y el proceso de adquisición?
-Estado Legal: Condición de posesión respaldada por Escrituras Públicas desde 1998 y reconocimiento municipal indirecto (PR y HR). Proceso: 1. Firma del Contrato de Transferencia de Posesión. 2. Trámite Notarial (Escritura Pública). 3. Entrega física del lote para uso y disfrute.
+15. ¿Cuál es el estado legal del proyecto y el proceso de adquisición de lote?
+Estado Legal del Proyecto: La condición actual del proyecto es de posesión, no de propiedad titulada. Esta posesión está respaldada documentalmente por Escrituras Públicas que datan desde mil novecientos noventa y ocho y cuenta con un reconocimiento municipal indirecto a través de las cartillas de Predio Rústico (PR) y Hoja Resumen (HR), lo que nos permite cumplir con nuestras obligaciones tributarias.
+
+Adicionalmente, contamos con la Resolución que aprueba el cambio de zonificación, reconociendo el área del proyecto como Zona Residencial de Densidad Media (RDM – R3). Este importante avance permite la ejecución de áreas recreativas, parques y espacios diversos, que forman parte del concepto integral de la comunidad sostenible de Villa Eco-Sostenible.
+
+Proceso de Adquisición: Para adquirir un lote con nosotros, el proceso se basa en la transferencia de esta posesión y consta de tres pasos principales:
+
+Firma del Contrato: Se firma un Contrato de Transferencia de Posesión.
+
+Trámite Notarial: Para tu seguridad jurídica, este contrato se puede elevar a Escritura Pública ante notario, dándole fecha cierta y plena fuerza legal.
+
+Entrega: Una vez completados los pagos y trámites, se te hace la entrega física del lote para que puedas ejercer tu derecho de uso y disfrute.
 
 16. ¿Qué documentos entrega la empresa al transferir la posesión?
 1. Contrato de Transferencia de Posesión (elevado a Escritura Pública a solicitud). 2. Escrituras Públicas que respaldan la posesión de la empresa desde 1998. 3. Cartillas Municipales (PR y HR).
@@ -270,8 +292,10 @@ No existe ningún juicio, denuncia o problema legal activo. El registro a nombre
 27. ¿Qué respaldo real tengo si surge un problema legal mañana?
 Su respaldo es el Contrato de Transferencia de Posesión y la cadena de posesión documentada de la empresa desde 1998 (Escrituras Públicas y reconocimiento municipal), lo que le otorga el derecho de uso y disfrute.
 
-28. ¿Qué riesgos existen al adquirir por transferencia de posesión?
-El riesgo principal es que no se adquiere la propiedad inscrita de forma automática. La titulación dependerá de un proceso de saneamiento personal que debe gestionar y asumir el cliente en el futuro.
+28. ¿Qué riesgos existen al adquirir el lote por transferencia de posesión?
+Al adquirir un lote mediante transferencia de posesión, el riesgo principal que debes considerar es que no estás adquiriendo la propiedad inscrita en Registros Públicos, sino únicamente el derecho de uso y disfrute del terreno. Esto implica que la obtención del título de propiedad no es automática; dependerá de que tú, como adquiriente, inicies y asumas un proceso de saneamiento de manera personal en el futuro.
+
+Además, es importante tener claro que la empresa no garantiza la titulación final, sino la entrega de una posesión documentada y formalizada mediante contrato. Sin embargo, para tu tranquilidad, esta posesión que te transferimos es sólida, ya que está respaldada por escrituras públicas desde mil novecientos noventa y ocho y cuenta con reconocimiento municipal.
 
 29. ¿La empresa garantiza que no habrá problemas legales en el futuro?
 Garantiza contractualmente la entrega de la posesión en la condición legal informada. No puede garantizar escenarios futuros externos, pero entrega una posesión debidamente respaldada para enfrentar contingencias.
