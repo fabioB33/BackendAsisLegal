@@ -130,7 +130,7 @@ from contextlib import asynccontextmanager
 _KB_SEED_DOCS = [
     {
         "titulo": "Prados de Paraíso - Base de Conocimientos Oficial (Versión Integrada)",
-        "marker": "posesionarios",  # texto único de la pregunta 58 — fuerza update si no está
+        "marker": "título de propiedad si pago el precio total",  # texto único de la pregunta 59 — fuerza update si no está
         "contenido": """BASE DE CONOCIMIENTOS DEL BOT (VERSIÓN INTEGRADA Y FINAL)
 
 1. ¿Qué es Prados del Paraíso?
@@ -367,6 +367,11 @@ En consecuencia, desde esa fecha la empresa ostenta la calidad de poseedora, con
 Así, aun en el supuesto de que la empresa incumpliera algún pago u obligación económica pendiente frente al señor Ampuero, ello no genera la pérdida, restitución ni afectación de la posesión ya transferida. La posesión se mantiene firme, pues fue otorgada formalmente mediante escritura pública y recae sobre la empresa como persona jurídica.
 Por tanto, cualquier relación económica entre las partes originales es independiente y no incide en la situación posesoria del predio, ni en la validez de la posesión que posteriormente se transfiera a los futuros posesionarios.
 En consecuencia, se reafirma que no existe riesgo alguno para el cliente respecto a la estabilidad, continuidad o validez de la posesión que adquirirá.
+
+59. ¿Puedo obtener título de propiedad si pago el precio total del lote?
+Entiendo tu interés en obtener un título de propiedad al realizar el pago total del lote. En el caso de Prados de Paraíso, el proyecto se desarrolla bajo la modalidad de transferencia de posesión, por lo que no se otorga título de propiedad inscrito en Registros Públicos como parte de la compra del lote. Recibirás un contrato de transferencia de posesión que acredita tu derecho de posesión sobre el lote.
+La condición actual del proyecto es de posesión, no de propiedad titulada. Esta posesión está respaldada documentalmente por Escrituras Públicas que datan desde mil novecientos noventa y ocho y cuenta con un reconocimiento municipal indirecto a través de las cartillas de Predio Rústico (PR) y Hoja Resumen (HR), lo que nos permite cumplir con nuestras obligaciones tributarias.
+Si deseas mayor información sobre esta modalidad o sobre el proyecto, estaré encantada de ayudarte.
 """,
     },
 ]
