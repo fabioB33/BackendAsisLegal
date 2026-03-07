@@ -189,23 +189,28 @@ R: Proceso:
             "titulo": "Prados de Paraíso - Base de Conocimientos Oficial (Preguntas 1 a 30)",
             "contenido": """BASE DE CONOCIMIENTOS OFICIAL - PRADOS DE PARAÍSO
 
-1. ¿Qué es Prados de Paraíso?
+1. ¿Qué es Prados del Paraíso?
 Prados de Paraíso es una marca comercial de Desarrolladora Santa María del Norte SAC, dedicada a desarrollar proyectos inmobiliarios con un enfoque ecológico y sostenible. Busca innovar en el sector, combinando eficiencia ambiental, diseño funcional y calidad de vida. Responde a la demanda de estilos de vida responsables y un desarrollo inmobiliario consciente.
 
 2. ¿Qué proyectos tiene Prados del Paraíso?
-Actualmente, la marca Prados de Paraíso cuenta con dos proyectos. Uno exitosamente entregado, denominado "Prados de Paraíso – Casa Huerto Ecológico"; y el segundo proyecto: "Prados de Paraíso Villa Eco-Sostenible", el cual se encuentra en desarrollo. Ambos proyectos están respaldados por una sólida trayectoria en el mercado inmobiliario y buscan ofrecer oportunidades de inversión segura con visión de futuro.
+Prados de Paraíso actualmente cuenta con dos proyectos. Uno de ellos ya ha sido entregado con éxito y se llama "Prados de Paraíso – Casa Huerto Ecológico". El segundo proyecto, que se encuentra en desarrollo, es "Prados de Paraíso Villa Eco-Sostenible".
+Ambos proyectos reflejan el compromiso de la marca con un enfoque ecológico y sostenible, ofreciendo oportunidades de inversión segura y con visión de futuro.
 
-3. ¿Dónde se ubica el proyecto Villa Eco-Sostenible?
-El proyecto Villa Eco-Sostenible se encuentra ubicado a la altura del 137.25 Km de la Carretera Panamericana Norte, distrito de Santa María, Provincia de Huaura y Departamento de Lima.
+3. ¿Dónde se ubica el proyecto Villa Eco- Sostenible?
+El proyecto "Prados de Paraíso Villa Eco-Sostenible" se encuentra ubicado a la altura del kilómetro 137.25 de la Carretera Panamericana Norte. Pertenece al distrito de Santa María, en la provincia de Huaura, departamento de Lima.
+Es una ubicación estratégica que busca combinar la accesibilidad con el entorno natural que caracteriza a nuestros desarrollos.
 
 4. ¿Quién desarrolla el proyecto?
-El proyecto es promovido por Desarrolladora Santa María del Norte S.A.C., una empresa con experiencia en el mercado inmobiliario. Además, cuenta con el respaldo y asesoramiento legal de DS CASAHIERRO ABOGADOS y tiene un convenio con la NOTARIA TAMBINI para garantizar la transparencia y seguridad jurídica en los procesos.
+El proyecto es promovido por Desarrolladora Santa María del Norte S.A.C., una empresa con experiencia en el mercado inmobiliario.
+Además, para garantizar la transparencia y seguridad jurídica en todos los procesos, contamos con el respaldo y asesoramiento legal de DS CASAHIERRO ABOGADOS y tenemos un convenio con la NOTARIA TAMBINI.
 
 5. ¿La empresa es formal?
-Sí, la empresa es formal y cuenta con el respaldo de la marca Prados de Paraíso, el cual tiene una trayectoria sólida en el desarrollo de proyectos inmobiliarios. Además, se encuentra inscrita en la Partida Electrónica N° 15437655 del Registro de Personas Jurídicas de Lima.
+Sí, la empresa es formal y cuenta con el respaldo de la marca Prados de Paraíso, que tiene una trayectoria sólida en el desarrollo de proyectos inmobiliarios. Además, se encuentra inscrita en la Partida Electrónica número 15437655 del Registro de Personas Jurídicas de Lima.
+Esto asegura que opera bajo todas las regulaciones legales pertinentes.
 
 6. ¿Desde cuándo existe el proyecto?
-El proyecto "Villa Eco-Sostenible" inicia en octubre del 2023.
+El proyecto "Villa Eco-Sostenible" inició en octubre del dos mil veintitrés.
+Sin embargo, es importante destacar que, aunque el desarrollo del proyecto es reciente, nuestra empresa mantiene la posesión del terreno desde el año mil novecientos noventa y ocho, lo cual nos brinda un respaldo histórico sólido en la zona.
 
 7. ¿Qué es exactamente lo que ofrecen?
 En Prados de Paraíso ofrecemos la transferencia de posesión de lotes. Esto significa que, al adquirir un lote con nosotros, obtienes el derecho de uso, disfrute y control efectivo del terreno.
@@ -223,10 +228,12 @@ Adicionalmente, contamos con la Resolución N.º 00202-2026-SOPCFPUR/MDSM, que a
 En resumen, te ofrecemos una oportunidad de inversión sólida, con respaldo legal, reconocimiento municipal y proyección urbana, dentro de una comunidad que ya cuenta con más de ochocientos clientes satisfechos y que continúa consolidándose como un proyecto sostenible y con visión de crecimiento.
 
 8. ¿Es lo mismo transferencia de posesión que comprar un terreno?
-No, no es exactamente lo mismo, aunque en la práctica ambos te permiten usar el terreno. Comprar la Propiedad (Título de Propiedad) significa que te conviertes en el dueño legal absoluto y tu nombre aparece inscrito en los Registros Públicos (SUNARP). La Transferencia de Posesión (lo que ofrecemos) significa que adquieres el uso, disfrute y control del lote con respaldo mediante Contrato de Transferencia de Posesión y Escritura Pública, pero no se inscribe inmediatamente como propiedad en SUNARP.
+No, no es exactamente lo mismo, aunque en la práctica ambos te permiten usar el terreno. La diferencia clave es que "comprar la propiedad" significa que te conviertes en el dueño legal absoluto y tu nombre aparece inscrito en los Registros Públicos (SUNARP).
+En cambio, la "transferencia de posesión", que es lo que ofrecemos en Prados de Paraíso, significa que adquieres el uso, disfrute y control del lote. Tienes un respaldo mediante el Contrato de Transferencia de Posesión y una Escritura Pública, lo que te da un derecho real sobre el bien, pero no la titularidad registral de la propiedad.
 
 9. ¿Qué diferencia hay entre posesión y propiedad?
-La Propiedad es el derecho real pleno que faculta a su titular a usar, disfrutar, disponer y reivindicar el bien, otorgándole la titularidad legal absoluta inscrita en SUNARP. La Posesión es el poder de hecho que ejerces sobre el bien (uso y control físico), un derecho real reconocido por el Código Civil (Art. 896). Mientras que la propiedad es el "título" inscrito, la posesión es el "uso y control físico" del terreno.
+La propiedad es el derecho legal absoluto sobre un bien, que te otorga la titularidad y se inscribe formalmente en los Registros Públicos. Como propietario, tienes el derecho de usar, disfrutar, disponer y reivindicar el bien.
+Por otro lado, la posesión es el poder de hecho que ejerces sobre un bien, lo que significa que lo usas y disfrutas físicamente, independientemente de si eres el titular registral. Este derecho está reconocido por el Código Civil y se puede transferir mediante un Contrato de Transferencia de Posesión. En resumen, la propiedad es el título legal, mientras que la posesión es el uso y control físico del terreno.
 
 10. ¿Puedo construir en el lote?
 Sí, puedes construir en el lote, sujeto a las normativas locales y el contrato de posesión.
@@ -235,10 +242,12 @@ Sí, puedes construir en el lote, sujeto a las normativas locales y el contrato 
 No, la escritura pública de transferencia de posesión no le hace propietario en el sentido registral. Formaliza la transferencia de la posesión y le otorga un respaldo sobre ella. Para ser propietario y que su nombre aparezca en Registros Públicos, se requiere un proceso adicional de saneamiento.
 
 12. ¿La empresa responde por el lote?
-La empresa responde por el lote en el sentido de que garantiza la transferencia de la posesión del predio. Desarrolladora Santa María del Norte S.A.C. formaliza esta transferencia mediante un Contrato de Transferencia de Posesión, el cual se eleva a Escritura Pública a solicitud del cliente, otorgando el derecho de uso y disfrute del lote asignado.
+Sí, la empresa responde por el lote en el sentido de que garantiza la transferencia de la posesión del predio. Desarrolladora Santa María del Norte S.A.C. formaliza esta transferencia mediante un Contrato de Transferencia de Posesión, el cual puede elevarse a Escritura Pública a solicitud del cliente, otorgando el derecho de uso y disfrute del lote asignado.
+Es importante aclarar que la empresa garantiza la entrega de la posesión en la condición legal informada (respaldada por documentos históricos), pero no responde por situaciones externas futuras, como desastres naturales o actos de terceros, ni ofrece indemnizaciones económicas por pérdida de posesión ajena a su incumplimiento contractual.
 
-13. ¿Qué planos entregarán a la firma del contrato?
-Se te proporcionará plano de ubicación, memoria descriptiva y planos perimétricos.
+13. ¿Qué planos entregarán a la firma del contrato de transferencia de posesión?
+Al momento de la firma del contrato de transferencia de posesión, se te proporcionarán tres documentos técnicos importantes: el plano de ubicación, la memoria descriptiva y los planos perimétricos.
+Estos documentos son fundamentales porque delimitan físicamente el área sobre la cual ejercerás tu derecho de posesión, permitiéndote identificar con claridad la ubicación y las medidas exactas de tu lote.
 
 14. ¿Cómo se respalda legalmente la posesión o qué documentos se entregan?
 La empresa cuenta con documentos que respaldan su posesión desde 1998: Escrituras Públicas y Cartillas municipales (PR y HR). Al cliente se le entrega: Contrato de transferencia de posesión (documento fundamental) y Pagos de tributos municipales (PR y HR) que demuestran el cumplimiento de obligaciones fiscales.
@@ -257,10 +266,11 @@ Trámite Notarial: Para tu seguridad jurídica, este contrato se puede elevar a 
 Entrega: Una vez completados los pagos y trámites, se te hace la entrega física del lote para que puedas ejercer tu derecho de uso y disfrute.
 
 16. ¿Qué documentos entrega la empresa al transferir la posesión?
-1. Contrato de Transferencia de Posesión (elevado a Escritura Pública a solicitud). 2. Escrituras Públicas que respaldan la posesión de la empresa desde 1998. 3. Cartillas Municipales (PR y HR).
+Para formalizar la transferencia y brindarte seguridad jurídica sobre tu lote en Prados de Paraíso, la empresa te entregará varios documentos importantes. Recibirás el Contrato de Transferencia de Posesión, que es el documento principal que te otorga el derecho de uso y disfrute del lote. Además, se te facilitarán las Escrituras Públicas que respaldan la posesión legítima del predio por parte de la empresa desde mil novecientos noventa y ocho, y las Cartillas Municipales (Predio Rústico y Hoja Resumen) que demuestran el cumplimiento de las obligaciones tributarias.
 
 17. ¿Qué significa una transferencia de posesión?
-Significa que se te otorga el uso y disfrute del predio. Se formaliza a través de un Contrato de Transferencia de Posesión elevado a Escritura Pública ante notario.
+Una transferencia de posesión significa que adquieres el uso, disfrute y control de un lote, lo que te permite ejercer un poder de hecho sobre el bien, como ocuparlo, cercarlo o construir en él. Este derecho está respaldado por un Contrato de Transferencia de Posesión que se eleva a Escritura Pública para mayor seguridad jurídica.
+Es importante entender que esto es diferente de la propiedad, ya que la propiedad implica ser el dueño legal absoluto con tu nombre inscrito en los Registros Públicos. La posesión es un derecho real reconocido por el Código Civil, que te otorga el control físico del terreno.
 
 18. ¿Qué derechos tengo como poseedor?
 Tiene el derecho de disponer y disfrutar del bien como si fuera suyo, ejerciendo un poder de hecho. Puede usar el lote, construir, cultivarlo o darle el uso que desee, siempre dentro de los límites legales y contractuales.
@@ -286,11 +296,12 @@ Sí. El Código Civil reconoce la posesión como un derecho real. Además, el Ar
 25. ¿Por qué la empresa no sanea primero el terreno?
 Es una decisión estratégica para ofrecer una alternativa comercialmente viable basada en la transferencia de posesión legítima. La empresa es transparente al informar que no vende propiedad saneada, permitiendo que el adquirente decida si desea realizar el saneamiento por su cuenta posteriormente.
 
-26. ¿Existe hoy algún juicio o problema legal activo sobre este terreno?
-No existe ningún juicio, denuncia o problema legal activo. El registro a nombre de DIREFOR es por un cambio normativo (Ley 29618), no por un litigio o invasión.
+26. ¿Existe hoy algún juicio, denuncia o problema legal activo sobre este terreno?
+Basándome en la información legal disponible sobre el proyecto Prados de Paraíso, puedo confirmarte que no existe ningún juicio, denuncia o problema legal activo sobre el terreno. Aunque la partida registral figura a nombre de DIREFOR, una entidad del Estado, esto no implica que haya un conflicto, ya que nuestra posesión está respaldada por escrituras públicas desde mil novecientos noventa y ocho. El proyecto se desarrolla en un marco de transparencia, sin litigios que pongan en riesgo tu adquisición de la posesión.
 
-27. ¿Qué respaldo real tengo si surge un problema legal mañana?
-Su respaldo es el Contrato de Transferencia de Posesión y la cadena de posesión documentada de la empresa desde 1998 (Escrituras Públicas y reconocimiento municipal), lo que le otorga el derecho de uso y disfrute.
+27. Si yo compro hoy el lote y mañana hay un problema legal con el terreno, ¿qué respaldo real tengo como adquiriente?
+Lo primero que debes saber es que la condición legal del predio que adquieres es la posesión, no la propiedad. Esto significa que nuestra empresa te garantiza la entrega de la posesión del lote, lo que te otorga el derecho de uso y disfrute del mismo. Esta transferencia se formaliza mediante un Contrato de Transferencia de Posesión.
+Tu respaldo como adquirente se basa en este Contrato de Transferencia de Posesión, que te otorga el derecho de uso y disfrute. Además, la posesión de nuestra empresa está documentada y respaldada por escrituras públicas que datan desde mil novecientos noventa y ocho, y la Municipalidad de Santa María reconoce nuestra posesión de manera indirecta a través de la emisión de cartillas municipales.
 
 28. ¿Qué riesgos existen al adquirir el lote por transferencia de posesión?
 Al adquirir un lote mediante transferencia de posesión, el riesgo principal que debes considerar es que no estás adquiriendo la propiedad inscrita en Registros Públicos, sino únicamente el derecho de uso y disfrute del terreno. Esto implica que la obtención del título de propiedad no es automática; dependerá de que tú, como adquiriente, inicies y asumas un proceso de saneamiento de manera personal en el futuro.
@@ -301,7 +312,8 @@ Además, es importante tener claro que la empresa no garantiza la titulación fi
 Garantiza contractualmente la entrega de la posesión en la condición legal informada. No puede garantizar escenarios futuros externos, pero entrega una posesión debidamente respaldada para enfrentar contingencias.
 
 30. ¿Qué obligaciones asume el adquirente?
-Pagar el precio pactado, cumplir las condiciones de entrega, asumir trámites notariales de la Escritura Pública y cumplir el reglamento interno del proyecto.
+Al adquirir un lote en Prados del Paraíso mediante transferencia de posesión, asumes varias obligaciones importantes que están detalladas en el contrato. Principalmente, te comprometes a pagar el precio pactado por la transferencia, ya sea al contado o siguiendo el cronograma de pagos establecido.
+Además, debes cumplir con las condiciones para que se te entregue la posesión, lo cual incluye la cancelación total del valor del lote. También serás responsable de asumir los trámites notariales y administrativos que origine la Escritura Pública del Contrato de Transferencia, así como cumplir con el reglamento interno del proyecto y las normas sobre el uso del lote.
 """
         },
         {
@@ -324,13 +336,20 @@ No. Son actos distintos. En Prados de Paraíso hay transparencia total: el contr
 Mediante saneamiento físico-legal (como prescripción adquisitiva judicial). Es un trámite personal del adquirente tras recibir el lote. La empresa facilita toda la documentación histórica para este fin.
 
 36. ¿Qué obligaciones mantiene la empresa luego de la transferencia?
-Entregar la posesión en la condición informada, proporcionar la documentación posesoria de sustento y cumplir cualquier otra obligación pendiente en el contrato.
+Una vez realizada la transferencia de la posesión del lote, las obligaciones de la empresa se limitan estrictamente a lo establecido en el contrato. Principalmente, la empresa se compromete a:
+Entregar la posesión del lote en la condición legal que se te informó previamente.
+Proporcionarte toda la documentación posesoria que sustenta la transferencia realizada.
+Cumplir con cualquier obligación contractual que pudiera haber quedado pendiente, si correspondiera.
 
-37. ¿La empresa mantiene la administración de áreas recreativas?
-Asume la gestión inicial. Posteriormente, la administración puede pasar a una asociación de propietarios según el reglamento interno.
+37. ¿La empresa mantiene la administración sobre áreas recreativas?
+La empresa asume la gestión inicial necesaria para la organización del proyecto. Sin embargo, la administración y el mantenimiento de las áreas recreativas pueden ser asumidos posteriormente por una asociación. Esto se realizará conforme a lo previsto en el reglamento interno y a medida que se consolide el proyecto.
 
-38. ¿Existen contingencias penales?
-No. El modelo se basa en la transferencia de posesión, figura reconocida legalmente y respaldada por escrituras públicas y transparencia notarial.
+38. ¿Existen contingencias penales asociadas al modelo de negocio?
+De acuerdo con la naturaleza del proyecto y lo establecido contractualmente, no existen contingencias penales inherentes al modelo de negocio de Prados de Paraíso.
+Esto se debe a que:
+Figura Legal Reconocida: El proyecto se basa en la transferencia de posesión, una figura reconocida por el ordenamiento jurídico peruano.
+Respaldo Documental: Nuestra posesión está respaldada por documentación formal y Escrituras Públicas que datan desde 1998.
+Transparencia: Todo el proceso se realiza de manera transparente, con asesoría legal y notarial, diferenciando claramente la posesión de la propiedad.
 
 39. ¿Qué respaldo real tiene el cliente si surge un conflicto?
 1. Posesión histórica desde 1998. 2. Asesoría de DS Casahierro Abogados y Notaría Tambini. 3. Entrega de toda la documentación probatoria para defensa o saneamiento.
@@ -339,7 +358,7 @@ No. El modelo se basa en la transferencia de posesión, figura reconocida legalm
 Es una entidad estatal. Aparece como titular debido a la Ley 29618 (2010), que registró a nombre del Estado terrenos sin dueño inscrito. Esto no invalida la posesión legítima de la empresa iniciada en 1998.
 
 41. ¿Es legal transferir la posesión de un terreno del Estado?
-Sí. La ley peruana protege la posesión como situación jurídica distinta a la propiedad. Se transfiere el derecho de posesión histórica (anterior a la inscripción estatal), lo cual es totalmente lícito.
+Sí, la legislación peruana reconoce la posesión como una situación jurídica protegida, que es distinta y diferente al derecho de propiedad. En Prados de Paraíso, lo que se transfiere es la posesión del terreno, no la propiedad. Nuestra empresa ejerce una posesión anterior a la inscripción estatal, debidamente documentada, y transfiere esa situación posesoria mediante un Contrato de Transferencia de Posesión.
 
 42. ¿Qué sucede si se revierte la posesión al Estado?
 No hay procesos activos para ello. La inscripción de DIREFOR no implica pérdida automática de la posesión documentada que se ejerce desde 1998.
@@ -347,50 +366,61 @@ No hay procesos activos para ello. La inscripción de DIREFOR no implica pérdid
 43. ¿La municipalidad reconoce oficialmente el proyecto?
 Sí, de manera indirecta mediante la emisión de cartillas PR y HR a nombre de la empresa, lo que permite el pago de tributos y valida la actividad en el predio.
 
-44. ¿Cómo impacta la ley que prohíbe la prescripción contra el Estado?
-La Ley 29618 impide nuevas prescripciones desde 2010, pero no invalida posesiones históricas preexistentes. Como nuestra posesión data de 1998, mantiene su legitimidad para ser transferida a los clientes.
+44. ¿Cómo impacta la ley que prohíbe la prescripción adquisitiva de inmuebles contra el Estado?
+La Ley número veintinueve mil seiscientos dieciocho, promulgada en dos mil diez, prohíbe que los bienes inmuebles de dominio privado estatal sean adquiridos por particulares mediante prescripción adquisitiva. Esto significa que ya no se puede reclamar la propiedad de terrenos estatales solo por haberlos poseído durante mucho tiempo a partir de esa fecha.
+Sin embargo, en el caso de Prados de Paraíso, la empresa cuenta con veintisiete años de posesión, la cual se inició antes de que esta ley entrara en vigor. Por lo tanto, la legitimidad de la posesión transferida a los clientes se mantiene, ya que la ley no invalida la posesión histórica que ya existía. En resumen, la ley protege al Estado de nuevas reclamaciones, pero no afecta las posesiones preexistentes.
 
-45. ¿La empresa acompaña judicialmente al cliente?
-La representación legal en procesos judiciales corresponde al cliente y su abogado. La empresa proporciona toda la documentación probatoria necesaria para respaldar la defensa.
+45. ¿La empresa acompaña judicialmente al cliente si hay alguna contingencia legal?
+Entiendo tu pregunta. En caso de que enfrentes una contingencia legal o decidas iniciar un proceso de formalización de tu lote, la gestión y representación legal corresponde al cliente. La empresa te proporcionará toda la documentación probatoria disponible para respaldar tu caso y facilitar tu defensa, pero la representación ante un juez debe ser realizada por tu propio abogado.
 
 46. ¿La empresa indemnizará en caso de pérdida de posesión?
-La empresa no tiene una política de indemnización por causas externas. Su compromiso es entregar la posesión respaldada por documentos históricos para que el cliente la ejerza y defienda.
+La empresa no asume responsabilidad económica ni ofrece una indemnización específica por la pérdida de la posesión si esta es causada por hechos externos o ajenos al incumplimiento del comprador.
+Lo que la empresa garantiza es la entrega de una posesión documentada y formalizada mediante contrato, respaldada por la documentación histórica que posee desde mil novecientos noventa y ocho. Es decir, su compromiso es entregarte el lote con el respaldo legal de su posesión, pero no cubre contingencias futuras fuera de su control.
 
 47. ¿Se puede individualizar la posesión por cada lote?
-Sí. El contrato delimita y asigna el derecho de uso y disfrute exclusivo sobre un lote específico, otorgando control físico total al adquirente sobre ese espacio.
+¡Claro que sí! Cuando firmas el Contrato de Transferencia de Posesión, este documento delimita y asigna el derecho de uso y disfrute exclusivo sobre un lote determinado dentro del proyecto. Esto significa que tú tienes el control físico y el derecho a usar y disfrutar ese espacio concreto, cercarlo o construir en él.
 
-48. ¿El adquirente podría ser demandado por el Estado?
-Podría ser parte involucrada, pero su defensa es sólida al contar con el respaldo de la posesión histórica desde 1998 y escrituras públicas que garantizan su inversión.
+48. ¿El adquirente podría ser demandado directamente ante un posible proceso judicial iniciado por el Estado?
+Sí, como adquirente de la posesión, usted sería la parte directamente involucrada en cualquier proceso judicial que el Estado pudiera iniciar. Sin embargo, es importante destacar que la posesión que recibe está respaldada por documentación histórica y escrituras públicas desde mil novecientos noventa y ocho. Esto le brinda una garantía sobre la posesión de su lote, permitiéndole usar y disfrutar su inversión con tranquilidad y confianza.
 
 49. ¿Qué pasa si el proyecto no logra consolidarse?
 Usted seguirá manteniendo la posesión, uso y disfrute de su lote específico basado en la antigüedad de la posesión transferida.
 
-50. ¿El contrato me protege frente a cualquier contingencia?
-Regula la transferencia y pagos, asegurando la entrega física y documental. No cubre litigios externos futuros con terceros o el Estado fuera del control de la empresa.
+50. ¿El contrato me protege frente a cualquier contingencia legal?
+El contrato está diseñado principalmente para regular la transferencia de la posesión y las obligaciones de pago, asegurando que usted reciba la posesión de su lote con el respaldo de documentos históricos. Si bien le brinda seguridad sobre la posesión física y la documentación que acredita su derecho de ocupación, no cubre situaciones externas. Esto incluye litigios con terceros o con el Estado que puedan surgir en el futuro.
 
-51. ¿La empresa responde económicamente frente a la pérdida de posesión?
-No asume responsabilidad económica por hechos externos ajenos a su incumplimiento contractual. El respaldo es documental y legal sobre la posesión entregada.
+51. ¿La empresa responde económicamente frente a la pérdida de la posesión del proyecto?
+La empresa no asume responsabilidad económica por la pérdida de la posesión si esta es causada por hechos externos o ajenos al incumplimiento del comprador. Es decir, la empresa respalda la posesión que te transfiere, pero no te indemnizará económicamente por causas que no sean su incumplimiento contractual.
 
 52. ¿Las cartillas PR y HR están a nombre de mi lote específico?
-Se emiten a nombre de la empresa por el predio matriz. Sirven como respaldo de posesión general del proyecto mientras no haya individualización administrativa.
+No, las cartillas PR (Predio Rústico) y HR (Hoja Resumen) no estarán a nombre de su lote específico de forma individual. Estos tributos municipales se gestionan sobre el predio matriz, es decir, sobre la propiedad principal del proyecto.
+Esto ocurre mientras no exista una individualización administrativa por cada lote. La empresa le entregará estos documentos que demuestran el cumplimiento de las obligaciones tributarias del predio general.
 
 53. ¿Mi lote tendrá su propia cartilla municipal?
 Inicialmente no, pero la empresa se compromete a realizar el trámite de Individualización Administrativa ante la Municipalidad para que cada lote cuente con su propia documentación.
 
 54. ¿La empresa tiene Libro de Reclamaciones?
-Sí. Físico en Calle Libertadores 155, Of. 302, San Isidro. Virtual en: https://pradosdeparaiso.com.pe/
+Sí, la empresa cuenta con un Libro de Reclamaciones.
+Lo tenemos disponible en dos formatos para tu comodidad: Físico: En nuestras oficinas ubicadas en Calle Libertadores ciento cincuenta y cinco, Oficina trescientos dos, distrito de San Isidro. Virtual: Accesible a través de nuestra página web: web: https://pradosdeparaiso.com.pe/.
 
 55. ¿Qué pasa si no estoy conforme con la respuesta de la empresa?
-En caso de que no estés conforme con la respuesta inicial, siempre existe la posibilidad de continuar el diálogo a través de los canales internos. La empresa prioriza la atención y resolución directa de los reclamos. Solo si, luego de agotar estas vías internas, el reclamo no resulta satisfactorio, el consumidor mantiene su derecho de recurrir a los organismos de protección al consumidor conforme a la normativa vigente.
+Entiendo que quieras saber qué opciones tienes si una respuesta no cumple tus expectativas.
+Si no estás conforme con la respuesta inicial que te brindamos, siempre puedes continuar el diálogo a través de nuestros canales internos para solicitar una revisión adicional, una reunión de aclaración o la intervención de un área especializada. Nuestra prioridad es resolver los reclamos de manera directa, pero si tras agotar estas vías internas el resultado no es satisfactorio, mantienes tu derecho de acudir a los organismos de protección al consumidor según la normativa vigente.
 
 56. ¿Cuáles son los plazos de atención de un reclamo?
-Conforme al Reglamento de Libro de Reclamaciones y su modificatoria, el plazo máximo para atender un reclamo es de 15 días hábiles improrrogables.
+Es una pregunta muy importante para tener claridad sobre los tiempos.
+De acuerdo con el Reglamento del Libro de Reclamaciones y su modificatoria, el plazo máximo que tenemos como proveedores para atender un reclamo y brindarte una respuesta es de quince días hábiles improrrogables.
 
 57. ¿La empresa se responsabiliza por daños externos?
 La empresa no asume responsabilidad por daños ocasionados por factores externos fuera de su control, tales como desastres naturales, actos de terceros o decisiones de autoridades. La responsabilidad se limita a cumplir las obligaciones expresamente asumidas en el contrato.
 
 58. Si la empresa deja de pagar la deuda pendiente con el señor Manuel Ampuero, ¿Eso podría hacer que yo pierda mi lote o mi derecho de posesión?
 No. Desde la suscripción de la Escritura Pública por la que el señor Manuel Ampuero transfirió la posesión a favor de Desarrolladora Santa María del Norte, la empresa adquirió válidamente la posesión efectiva del terreno. Esta condición no se ve afectada por las obligaciones internas entre las partes originales. Aun en el supuesto de que la empresa incumpliera algún pago, ello no genera la pérdida ni afectación de la posesión ya transferida formalmente mediante escritura pública. Por lo tanto, no existe riesgo alguno para el cliente.
+
+59. ¿Puedo obtener título de propiedad si pago el precio total del lote?
+Entiendo tu interés en obtener un título de propiedad al realizar el pago total del lote. En el caso de Prados de Paraíso, el proyecto se desarrolla bajo la modalidad de transferencia de posesión, por lo que no se otorga título de propiedad inscrito en Registros Públicos como parte de la compra del lote. Recibirás un contrato de transferencia de posesión que acredita tu derecho de posesión sobre el lote.
+La condición actual del proyecto es de posesión, no de propiedad titulada. Esta posesión está respaldada documentalmente por Escrituras Públicas que datan desde mil novecientos noventa y ocho y cuenta con un reconocimiento municipal indirecto a través de las cartillas de Predio Rústico (PR) y Hoja Resumen (HR), lo que nos permite cumplir con nuestras obligaciones tributarias.
+Si deseas mayor información sobre esta modalidad o sobre el proyecto, estaré encantada de ayudarte.
 """
         }
     ]
