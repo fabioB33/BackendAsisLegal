@@ -130,7 +130,7 @@ from contextlib import asynccontextmanager
 _KB_SEED_DOCS = [
     {
         "titulo": "Prados de Paraíso - Base de Conocimientos Oficial (Versión Integrada)",
-        "marker": "título de propiedad si pago el precio total",  # texto único de la pregunta 59 — fuerza update si no está
+        "marker": "Es una pregunta muy importante para tener claridad",  # texto único de la pregunta 56 — fuerza update si no está
         "contenido": """BASE DE CONOCIMIENTOS DEL BOT (VERSIÓN INTEGRADA Y FINAL)
 
 1. ¿Qué es Prados del Paraíso?
@@ -187,6 +187,10 @@ Es importante aclarar que la empresa garantiza la entrega de la posesión en la 
 13. ¿Qué planos entregarán a la firma del contrato de transferencia de posesión?
 Al momento de la firma del contrato de transferencia de posesión, se te proporcionarán tres documentos técnicos importantes: el plano de ubicación, la memoria descriptiva y los planos perimétricos.
 Estos documentos son fundamentales porque delimitan físicamente el área sobre la cual ejercerás tu derecho de posesión, permitiéndote identificar con claridad la ubicación y las medidas exactas de tu lote.
+
+14. ¿Cómo se respalda legalmente la posesión o qué documentos se entregan a los clientes?
+La posesión en Prados de Paraíso está respaldada legalmente por varios documentos sólidos. La empresa ejerce una posesión de buena fe desde mil novecientos noventa y ocho, acreditada por escrituras públicas que dan fe de las transferencias de posesión a lo largo del tiempo. Además, la Municipalidad de Santa María reconoce esta posesión de manera indirecta a través de la emisión de cartillas municipales, como el Predio Rústico (PR) y la Hoja Resumen (HR), que demuestran el cumplimiento de las obligaciones tributarias.
+Cuando adquieres un lote, te entregamos el Contrato de Transferencia de Posesión, que es el documento fundamental que formaliza tu derecho de uso y disfrute. Este contrato puede elevarse a Escritura Pública ante notario para mayor seguridad. También te facilitamos las escrituras públicas que respaldan la posesión de la empresa desde mil novecientos noventa y ocho y las cartillas municipales (PR y HR) que demuestran el cumplimiento de las obligaciones tributarias del predio.
 
 14. ¿Cómo se respalda legalmente la posesión o qué documentos se entregan a los clientes?
 La posesión en Prados de Paraíso está respaldada legalmente por varios documentos sólidos. La empresa ejerce una posesión de buena fe desde mil novecientos noventa y ocho, acreditada por escrituras públicas que dan fe de las transferencias de posesión a lo largo del tiempo. Además, la Municipalidad de Santa María reconoce esta posesión de manera indirecta a través de la emisión de cartillas municipales, como el Predio Rústico (PR) y la Hoja Resumen (HR), que demuestran el cumplimiento de las obligaciones tributarias.
@@ -285,14 +289,20 @@ La formalización futura de la posesión se gestiona a través de un proceso de 
 Es importante saber que este saneamiento no forma parte del servicio que ofrece la empresa, sino que debe ser asumido de manera personal por el adquirente una vez que haya recibido la posesión del lote y cumplido con las condiciones contractuales. Existen vías legales como la prescripción adquisitiva de dominio, que se tramita judicialmente, o vías administrativas, según la normativa. La empresa te brindará el respaldo documental necesario para iniciar este proceso.
 
 36. ¿Qué obligaciones mantiene la empresa luego de la transferencia?
-Una vez realizada la transferencia de la posesión del lote, las obligaciones de la empresa se limitan estrictamente a lo establecido en el contrato. Principalmente, la empresa se compromete a entregar la posesión del lote en la condición legal que se te informó previamente, proporcionarte toda la documentación posesoria que sustenta la transferencia realizada, y cumplir con cualquier obligación contractual que pudiera haber quedado pendiente, si correspondiera.
+Una vez realizada la transferencia de la posesión del lote, las obligaciones de la empresa se limitan estrictamente a lo establecido en el contrato. Principalmente, la empresa se compromete a:
+Entregar la posesión del lote en la condición legal que se te informó previamente.
+Proporcionarte toda la documentación posesoria que sustenta la transferencia realizada.
+Cumplir con cualquier obligación contractual que pudiera haber quedado pendiente, si correspondiera.
 
 37. ¿La empresa mantiene la administración sobre áreas recreativas?
 La empresa asume la gestión inicial necesaria para la organización del proyecto. Sin embargo, la administración y el mantenimiento de las áreas recreativas pueden ser asumidos posteriormente por una asociación. Esto se realizará conforme a lo previsto en el reglamento interno y a medida que se consolide el proyecto.
 
 38. ¿Existen contingencias penales asociadas al modelo de negocio?
 De acuerdo con la naturaleza del proyecto y lo establecido contractualmente, no existen contingencias penales inherentes al modelo de negocio de Prados de Paraíso.
-Esto se debe a que el proyecto se basa en la transferencia de posesión, una figura reconocida por el ordenamiento jurídico peruano. Nuestra posesión está respaldada por documentación formal y Escrituras Públicas que datan desde 1998. Todo el proceso se realiza de manera transparente, con asesoría legal y notarial, diferenciando claramente la posesión de la propiedad.
+Esto se debe a que:
+Figura Legal Reconocida: El proyecto se basa en la transferencia de posesión, una figura reconocida por el ordenamiento jurídico peruano.
+Respaldo Documental: Nuestra posesión está respaldada por documentación formal y Escrituras Públicas que datan desde 1998.
+Transparencia: Todo el proceso se realiza de manera transparente, con asesoría legal y notarial, diferenciando claramente la posesión de la propiedad.
 
 39. ¿Qué respaldo real tiene el cliente si surge un conflicto?
 Entiendo perfectamente tu inquietud, es fundamental sentir seguridad al realizar una inversión.
@@ -323,7 +333,7 @@ La empresa no asume responsabilidad económica ni ofrece una indemnización espe
 Lo que la empresa garantiza es la entrega de una posesión documentada y formalizada mediante contrato, respaldada por la documentación histórica que posee desde mil novecientos noventa y ocho. Es decir, su compromiso es entregarte el lote con el respaldo legal de su posesión, pero no cubre contingencias futuras fuera de su control.
 
 47. ¿Se puede individualizar la posesión por cada lote?
-Sí. Cuando firmas el Contrato de Transferencia de Posesión, este documento delimita y asigna el derecho de uso y disfrute exclusivo sobre un lote determinado dentro del proyecto. Esto significa que tú tienes el control físico y el derecho a usar y disfrutar ese espacio concreto, cercarlo o construir en él.
+¡Claro que sí! Cuando firmas el Contrato de Transferencia de Posesión, este documento delimita y asigna el derecho de uso y disfrute exclusivo sobre un lote determinado dentro del proyecto. Esto significa que tú tienes el control físico y el derecho a usar y disfrutar ese espacio concreto, cercarlo o construir en él.
 
 48. ¿El adquirente podría ser demandado directamente ante un posible proceso judicial iniciado por el Estado?
 Sí, como adquirente de la posesión, usted sería la parte directamente involucrada en cualquier proceso judicial que el Estado pudiera iniciar. Sin embargo, es importante destacar que la posesión que recibe está respaldada por documentación histórica y escrituras públicas desde mil novecientos noventa y ocho. Esto le brinda una garantía sobre la posesión de su lote, permitiéndole usar y disfrutar su inversión con tranquilidad y confianza.
@@ -349,12 +359,14 @@ La empresa se compromete a realizar el procedimiento de Individualización Admin
 
 54. ¿La empresa tiene Libro de Reclamaciones?
 Sí, la empresa cuenta con un Libro de Reclamaciones.
-Lo tenemos disponible en dos formatos para tu comodidad: Físico en nuestras oficinas ubicadas en Calle Libertadores ciento cincuenta y cinco, Oficina trescientos dos, distrito de San Isidro. Virtual accesible a través de nuestra página web: https://pradosdeparaiso.com.pe/
+Lo tenemos disponible en dos formatos para tu comodidad: Físico: En nuestras oficinas ubicadas en Calle Libertadores ciento cincuenta y cinco, Oficina trescientos dos, distrito de San Isidro. Virtual: Accesible a través de nuestra página web: web: https://pradosdeparaiso.com.pe/.
 
 55. ¿Qué pasa si no estoy conforme con la respuesta de la empresa?
+Entiendo que quieras saber qué opciones tienes si una respuesta no cumple tus expectativas.
 Si no estás conforme con la respuesta inicial que te brindamos, siempre puedes continuar el diálogo a través de nuestros canales internos para solicitar una revisión adicional, una reunión de aclaración o la intervención de un área especializada. Nuestra prioridad es resolver los reclamos de manera directa, pero si tras agotar estas vías internas el resultado no es satisfactorio, mantienes tu derecho de acudir a los organismos de protección al consumidor según la normativa vigente.
 
 56. ¿Cuáles son los plazos de atención de un reclamo?
+Es una pregunta muy importante para tener claridad sobre los tiempos.
 De acuerdo con el Reglamento del Libro de Reclamaciones y su modificatoria, el plazo máximo que tenemos como proveedores para atender un reclamo y brindarte una respuesta es de quince días hábiles improrrogables.
 
 57. ¿La empresa se responsabiliza por daños externos?
