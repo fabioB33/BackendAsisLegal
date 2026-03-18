@@ -55,10 +55,15 @@ load_dotenv(ROOT_DIR / '.env')
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+# MongoDB connection (legacy — not actively used; SQLite is the active store)
+mongo_url = os.environ.get('MONGO_URL', '')
+if mongo_url:
+    client = AsyncIOMotorClient(mongo_url)
+    db = client[os.environ.get('DB_NAME', 'prados')]
+else:
+    client = None
+    db = None
+    logger.warning("⚠️ MONGO_URL not set — MongoDB disabled (SQLite is active)")
 
 # LLM Configuration
 EMERGENT_LLM_KEY = os.environ.get('EMERGENT_LLM_KEY')
@@ -434,9 +439,10 @@ async def lifespan(app: FastAPI):
     logger.info("✅ Application started successfully")
     yield
     # Shutdown — properly close MongoDB async connection
-    logger.info("🛑 Shutting down — closing MongoDB connection...")
-    client.close()
-    logger.info("✅ MongoDB connection closed")
+    if client:
+        logger.info("🛑 Shutting down — closing MongoDB connection...")
+        client.close()
+        logger.info("✅ MongoDB connection closed")
 
 app = FastAPI(lifespan=lifespan)
 
